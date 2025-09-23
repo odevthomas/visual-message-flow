@@ -1,8 +1,7 @@
 import Hero from "@/components/Hero";
-import ServicesCarousel from "@/components/ServicesCarousel";
-import Differentials from "@/components/Differentials";
-import BrandsCarousel from "@/components/BrandsCarousel";
-import Testimonials from "@/components/Testimonials";
+import ServicesSection from "@/components/ServicesSection";
+import PartnersSection from "@/components/PartnersSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import HowItWorks from "@/components/HowItWorks";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -12,10 +11,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Hero />
-      <ServicesCarousel />
-      <Differentials />
-      <BrandsCarousel />
-      <Testimonials />
+      <ServicesSection />
+      <PartnersSection />
+      <TestimonialsSection />
       <HowItWorks />
       <FinalCTA />
       <Footer />

@@ -8,48 +8,50 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Dark theme base */
-    --background: 0 0% 8%;
-    --foreground: 0 0% 98%;
+    /* Metallic dark blue theme inspired by automotive finish */
+    --background: 210 45% 8%; /* Deep metallic blue */
+    --foreground: 0 0% 98%; /* Pure white text */
 
-    --card: 0 0% 12%;
+    --card: 210 40% 12%; /* Darker metallic blue cards */
     --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 12%;
+    --popover: 210 40% 12%;
     --popover-foreground: 0 0% 98%;
 
-    /* Brand colors from logo */
-    --primary: 207 100% 50%; /* Blue neon */
-    --primary-foreground: 0 0% 8%;
+    /* Brand colors - vibrant accents on dark metallic */
+    --primary: 210 85% 45%; /* Metallic blue primary */
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 120 100% 50%; /* Green neon */
-    --secondary-foreground: 0 0% 8%;
+    --secondary: 120 75% 45%; /* Vibrant green like the reference */
+    --secondary-foreground: 0 0% 98%;
 
-    --accent: 25 100% 50%; /* Orange neon */
-    --accent-foreground: 0 0% 8%;
+    --accent: 210 90% 65%; /* Light metallic blue accent */
+    --accent-foreground: 210 45% 8%;
 
-    --destructive: 0 100% 50%; /* Red neon */
+    --destructive: 0 85% 55%;
     --destructive-foreground: 0 0% 98%;
 
-    --muted: 0 0% 20%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 210 25% 20%;
+    --muted-foreground: 210 15% 70%;
 
-    --border: 0 0% 25%;
-    --input: 0 0% 15%;
-    --ring: 207 100% 50%;
+    --border: 210 25% 25%;
+    --input: 210 40% 15%;
+    --ring: 210 85% 45%;
 
-    --radius: 0.75rem;
+    --radius: 1rem; /* More rounded for modern look */
 
-    /* Custom brand gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(207 100% 50%), hsl(260 100% 50%));
-    --gradient-hero: linear-gradient(135deg, hsl(0 0% 8% / 0.9), hsl(207 100% 15% / 0.3));
-    --gradient-neon: linear-gradient(90deg, hsl(207 100% 50%), hsl(25 100% 50%), hsl(0 100% 50%), hsl(120 100% 50%));
+    /* Metallic automotive-inspired gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(210 85% 45%), hsl(210 90% 65%), hsl(210 80% 35%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 45% 8% / 0.95), hsl(210 85% 15% / 0.8), hsl(210 90% 25% / 0.3));
+    --gradient-card: linear-gradient(145deg, hsl(210 40% 12%), hsl(210 35% 18%), hsl(210 40% 12%));
+    --gradient-metallic: linear-gradient(45deg, hsl(210 80% 20%), hsl(210 90% 40%), hsl(210 85% 25%));
+    --gradient-green: linear-gradient(135deg, hsl(120 75% 45%), hsl(120 80% 55%));
 
-    /* Neon shadows */
-    --shadow-blue: 0 0 20px hsl(207 100% 50% / 0.5);
-    --shadow-green: 0 0 20px hsl(120 100% 50% / 0.5);
-    --shadow-orange: 0 0 20px hsl(25 100% 50% / 0.5);
-    --shadow-red: 0 0 20px hsl(0 100% 50% / 0.5);
+    /* Sophisticated shadows with metallic glow */
+    --shadow-primary: 0 8px 32px hsl(210 85% 45% / 0.3);
+    --shadow-green: 0 8px 32px hsl(120 75% 45% / 0.3);
+    --shadow-card: 0 4px 20px hsl(210 45% 8% / 0.4);
+    --shadow-glow: 0 0 40px hsl(210 90% 65% / 0.2);
 
     /* Animation variables */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -86,34 +88,44 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', 'SF Pro Display', -apple-system, system-ui, sans-serif;
   }
 
-  /* Custom utility classes */
-  .neon-blue {
-    color: hsl(var(--primary));
-    text-shadow: var(--shadow-blue);
+  /* Modern rounded fonts */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', 'SF Pro Display', -apple-system, system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: hsl(var(--foreground));
+  }
+
+  /* Utility classes for metallic design */
+  .metallic-text {
+    color: hsl(var(--foreground));
+    text-shadow: 0 1px 2px hsl(210 45% 8% / 0.8);
   }
   
-  .neon-green {
-    color: hsl(var(--secondary));
-    text-shadow: var(--shadow-green);
-  }
-  
-  .neon-orange {
+  .accent-glow {
     color: hsl(var(--accent));
-    text-shadow: var(--shadow-orange);
+    text-shadow: 0 0 20px hsl(var(--accent) / 0.5);
   }
   
-  .neon-red {
-    color: hsl(var(--destructive));
-    text-shadow: var(--shadow-red);
+  .green-glow {
+    color: hsl(var(--secondary));
+    text-shadow: 0 0 20px hsl(var(--secondary) / 0.4);
   }
 
   .gradient-text {
-    background: var(--gradient-neon);
+    background: var(--gradient-metallic);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  .card-metallic {
+    background: var(--gradient-card);
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-card);
   }
 
   .pulse-neon {

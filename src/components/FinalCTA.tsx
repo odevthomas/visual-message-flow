@@ -11,109 +11,54 @@ const FinalCTA = () => {
   };
 
   return (
-    <section className="py-20 px-4 relative overflow-hidden">
-      {/* Background gradient */}
-      <div 
-        className="absolute inset-0"
-        style={{ 
-          background: 'linear-gradient(135deg, hsl(0 0% 8% / 0.95), hsl(207 100% 15% / 0.4), hsl(25 100% 15% / 0.4), hsl(0 100% 15% / 0.4), hsl(120 100% 15% / 0.4))'
-        }}
-      />
+    <section className="py-32 px-6 relative overflow-hidden">
+      {/* Premium background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-card to-background" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--accent)/0.15),transparent_70%)]" />
       
-      {/* Animated background elements */}
-      <div className="absolute inset-0">
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-primary/20 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.3, 0.8, 0.3],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
-      </div>
-
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         <motion.h2
-          className="text-3xl md:text-4xl lg:text-6xl font-bold mb-6 text-foreground leading-tight"
-          initial={{ opacity: 0, scale: 0.8 }}
+          className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 metallic-text leading-[1.1]"
+          initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
           Não deixe seus equipamentos{" "}
-          <span className="neon-red">parados</span>
+          <span className="green-glow">parados</span>
         </motion.h2>
 
         <motion.p
-          className="text-lg md:text-xl mb-12 text-muted-foreground max-w-2xl mx-auto"
+          className="text-xl md:text-2xl mb-16 text-muted-foreground max-w-3xl mx-auto font-medium"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          Chame agora no WhatsApp e garanta atendimento rápido e seguro para sua casa ou empresa.
+          Atendimento imediato pelo WhatsApp • Técnico no local • Garantia total
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          {/* Main WhatsApp CTA */}
           <Button
             onClick={handleWhatsAppClick}
             size="lg"
-            className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-12 py-6 text-xl font-bold rounded-full animate-pulse-neon hover:scale-110 transition-all duration-300 shadow-[0_0_30px_hsl(120_100%_50%/0.3)]"
+            className="group relative bg-gradient-to-r from-secondary to-secondary/90 hover:from-secondary/90 hover:to-secondary text-secondary-foreground px-16 py-8 text-2xl font-bold rounded-3xl transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-green"
           >
-            <MessageCircle className="mr-4 h-8 w-8" />
-            Agendar minha visita pelo WhatsApp
+            <motion.div
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="mr-6"
+            >
+              <MessageCircle className="h-8 w-8" />
+            </motion.div>
+            Solicitar Atendimento Agora
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </Button>
-
-          {/* Phone CTA */}
-          <Button
-            variant="outline"
-            size="lg"
-            className="border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-6 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105"
-            onClick={() => window.open('tel:+5519991195261', '_self')}
-          >
-            <Phone className="mr-3 h-6 w-6" />
-            (19) 9 9119-5261
-          </Button>
-        </motion.div>
-
-        {/* Trust indicators */}
-        <motion.div
-          className="mt-12 flex flex-wrap justify-center items-center gap-6 text-sm text-muted-foreground"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
-            <span>Atendimento 24/7</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span>Garantia em todos os serviços</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-            <span>+2.000 clientes satisfeitos</span>
-          </div>
         </motion.div>
       </div>
     </section>

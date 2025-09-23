@@ -12,24 +12,20 @@ const FloatingWhatsApp = () => {
   return (
     <motion.button
       onClick={handleWhatsAppClick}
-      className="fixed bottom-6 right-6 z-50 bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full p-4 shadow-lg hover:shadow-green transition-all duration-300"
-      whileHover={{ scale: 1.1 }}
+      className="fixed bottom-8 right-8 z-50 bg-gradient-to-r from-secondary to-secondary/90 text-secondary-foreground rounded-2xl p-4 shadow-lg hover:shadow-green transition-all duration-300 backdrop-blur-sm border border-secondary/20"
+      whileHover={{ scale: 1.05, y: -2 }}
       whileTap={{ scale: 0.95 }}
       animate={{ 
-        boxShadow: [
-          "0 0 20px hsl(120 100% 50% / 0.3)",
-          "0 0 30px hsl(120 100% 50% / 0.6)",
-          "0 0 20px hsl(120 100% 50% / 0.3)"
-        ]
+        y: [0, -4, 0],
       }}
       transition={{ 
-        duration: 2, 
+        duration: 3, 
         repeat: Infinity,
-        repeatType: "reverse"
+        ease: "easeInOut"
       }}
       aria-label="Contatar via WhatsApp"
     >
-      <MessageCircle size={24} />
+      <MessageCircle size={20} />
     </motion.button>
   );
 };

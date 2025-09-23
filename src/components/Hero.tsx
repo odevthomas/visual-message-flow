@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/hero-metallic-bg.jpg";
 import logo from "@/assets/logo-bras-service.png";
 
 const Hero = () => {
@@ -14,81 +14,114 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background with parallax effect */}
+      {/* Metallic background with parallax */}
       <div 
         className="absolute inset-0 parallax-bg"
         style={{ 
           backgroundImage: `url(${heroBg})`,
-          transform: 'translateZ(0)' // Hardware acceleration
+          transform: 'translateZ(0)'
         }}
       />
       
-      {/* Dark overlay gradient */}
+      {/* Sophisticated overlay */}
       <div 
         className="absolute inset-0"
         style={{ background: 'var(--gradient-hero)' }}
       />
 
-      {/* Logo */}
+      {/* Floating particles effect */}
+      <div className="absolute inset-0">
+        {[...Array(12)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-accent/30 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              scale: [1, 1.5, 1],
+              opacity: [0.3, 0.8, 0.3],
+              y: [0, -30, 0],
+            }}
+            transition={{
+              duration: 4 + Math.random() * 3,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Centered logo */}
       <motion.div 
-        className="absolute top-8 left-8 z-20"
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
+        className="absolute top-12 left-1/2 transform -translate-x-1/2 z-20"
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.2 }}
       >
         <img 
           src={logo} 
-          alt="Bras Service Logo" 
-          className="h-16 w-auto"
+          alt="Bras Service - Especialistas em Refrigeração" 
+          className="h-20 w-auto filter drop-shadow-lg"
         />
       </motion.div>
 
       {/* Main content */}
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
         <motion.h1 
-          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground leading-tight"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 metallic-text leading-[1.1]"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 1, delay: 0.4 }}
         >
           Especialistas em{" "}
-          <span className="neon-blue">Geladeiras</span>,{" "}
-          <span className="neon-green">Freezers</span> e{" "}
-          <span className="neon-orange">Equipamentos Industriais</span>
+          <span className="accent-glow">Refrigeração</span>
+          <br />
+          <span className="text-3xl md:text-4xl lg:text-5xl font-medium text-muted-foreground">
+            Campinas e Região
+          </span>
         </motion.h1>
 
         <motion.p 
-          className="text-lg md:text-xl lg:text-2xl mb-8 text-muted-foreground max-w-3xl mx-auto"
+          className="text-xl md:text-2xl mb-12 text-muted-foreground max-w-3xl mx-auto font-medium"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
         >
-          Atendimento rápido em Campinas e região, direto no seu endereço.
+          Atendimento rápido e profissional direto no seu endereço
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
         >
           <Button
             onClick={handleWhatsAppClick}
             size="lg"
-            className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8 py-4 text-lg font-semibold rounded-full animate-pulse-neon transition-all duration-300 hover:scale-105"
+            className="group relative bg-gradient-to-r from-secondary to-secondary/90 hover:from-secondary/90 hover:to-secondary text-secondary-foreground px-12 py-6 text-xl font-bold rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-green"
           >
-            <MessageCircle className="mr-3 h-6 w-6" />
-            Chamar no WhatsApp Agora
+            <motion.div
+              animate={{ rotate: [0, 5, -5, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="mr-4"
+            >
+              <MessageCircle className="h-7 w-7" />
+            </motion.div>
+            Chamar no WhatsApp
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </Button>
         </motion.div>
       </div>
 
       {/* Scroll indicator */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
+        animate={{ y: [0, 12, 0] }}
+        transition={{ duration: 2.5, repeat: Infinity }}
       >
-        <div className="w-1 h-8 bg-gradient-to-b from-primary to-transparent rounded-full" />
+        <div className="w-1 h-12 bg-gradient-to-b from-accent to-transparent rounded-full shadow-glow" />
       </motion.div>
     </section>
   );
