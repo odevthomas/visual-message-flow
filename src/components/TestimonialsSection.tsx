@@ -1,194 +1,135 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
-import { Star, Quote } from "lucide-react";
+import React, { useRef, useEffect } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Star } from 'lucide-react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
-const testimonials = [
-  {
-    name: "Maria Silva",
-    role: "Dona de casa",
-    location: "Campinas",
-    content: "Serviço excepcional! Minha geladeira estava fazendo barulho estranho e eles resolveram no mesmo dia. Muito profissionais.",
-    rating: 5,
-    image: "👩‍💼"
-  },
-  {
-    name: "Carlos Mendes",
-    role: "Gerente de Supermercado",
-    location: "Valinhos",
-    content: "A Bras Service salvou nosso final de semana! Sistema de refrigeração parou na sexta e eles vieram no sábado resolver tudo.",
-    rating: 5,
-    image: "👨‍💼"
-  },
-  {
-    name: "Dr. Ana Costa",
-    role: "Clínica Médica",
-    location: "Indaiatuba",
-    content: "Refrigerador de vacinas com problema urgente. Atendimento técnico especializado e muito cuidadoso. Recomendo!",
-    rating: 5,
-    image: "👩‍⚕️"
-  },
-  {
-    name: "João Santos",
-    role: "Restaurante",
-    location: "Campinas",
-    content: "Contrato de manutenção preventiva há 2 anos. Nunca mais tivemos problemas inesperados. Vale cada centavo!",
-    rating: 5,
-    image: "👨‍🍳"
-  }
-];
+interface Testimonial {
+  name: string;
+  location: string;
+  comment: string;
+  rating: number;
+  service: string;
+  company?: string;
+}
 
-const TestimonialsSection = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+export const TestimonialsSection: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true });
+  const prevRef = useRef<HTMLDivElement>(null);
+  const nextRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-    }, 5000);
-
-    return () => clearInterval(timer);
-  }, []);
+  const testimonials: Testimonial[] = [
+    { name: 'José Paulo Silva', location: 'Campinas - SP', company: 'Restaurante Dom Sabor', comment: 'A Bras Service salvou nosso negócio! Nossa câmara fria parou na véspera do fim de semana e eles vieram em menos de 2 horas. Serviço impecável!', rating: 5, service: 'Reparo de Câmara Fria' },
+    { name: 'Maria Santos', location: 'Valinhos - SP', comment: 'Técnico muito competente e educado. Explicou todo o problema, fez o reparo com garantia e ainda deu dicas de manutenção. Recomendo!', rating: 5, service: 'Manutenção Preventiva' },
+    { name: 'Carlos Oliveira', location: 'Americana - SP', company: 'Supermercado Central', comment: 'Há 3 anos contratamos a Bras Service para manutenção dos nossos equipamentos. Nunca tivemos problemas sérios desde então.', rating: 5, service: 'Contrato de Manutenção' },
+    { name: 'Ana Costa', location: 'Sumaré - SP', comment: 'Minha geladeira estava fazendo muito barulho e gastando energia demais. Após o serviço da Bras Service, ficou como nova.', rating: 5, service: 'Conserto de Geladeira' },
+    { name: 'Roberto Lima', location: 'Indaiatuba - SP', company: 'Padaria Três Irmãos', comment: 'Atendimento profissional e preço justo. Resolveram o problema do nosso freezer rapidamente. Muito satisfeito com o resultado.', rating: 5, service: 'Reparo de Freezer' },
+    { name: 'Fernanda Torres', location: 'Paulínia - SP', comment: 'Excelente trabalho! A equipe chegou no horário marcado, diagnosticou o problema e executou o reparo com perfeição. Super recomendo!', rating: 5, service: 'Higienização Completa' },
+  ];
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-card via-background to-card" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--accent)/0.1),transparent_50%)]" />
+    <section ref={containerRef} className="py-16 sm:py-20 md:py-24 relative overflow-hidden" style={{ background: 'hsl(210 45% 8%)' }} id="testimonials">
+
+      {/* Background subtle metallic particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-accent rounded-full opacity-20"
+            style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
+            animate={{ scale: [1, 1.5, 1], opacity: [0.2, 0.4, 0.2] }}
+            transition={{ duration: 4 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 2 }}
+          />
+        ))}
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 metallic-text">
-            O que nossos <span className="gradient-text">clientes dizem</span>
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        {/* Title */}
+        <motion.div className="text-center mb-12 sm:mb-16 md:mb-20" initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold metallic-text mb-6 sm:mb-8">
+            O Que Nossos Clientes Dizem
           </h2>
-          
-          {/* Rating display */}
-          <div className="flex items-center justify-center mb-4">
-            <div className="flex items-center space-x-1 mr-4">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
-              ))}
-            </div>
-            <span className="text-2xl font-bold accent-glow">4.9</span>
-            <span className="text-muted-foreground ml-2">(+2.000 avaliações)</span>
-          </div>
+          <p className="text-lg sm:text-xl text-foreground/70 max-w-3xl mx-auto">
+            A confiança de centenas de clientes satisfeitos é nossa maior conquista
+          </p>
         </motion.div>
 
-        {/* Main testimonial display */}
-        <div className="relative min-h-[400px] flex items-center justify-center">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
-              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-              exit={{ opacity: 0, scale: 0.8, rotateY: -90 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              className="card-metallic rounded-3xl p-8 md:p-12 text-center max-w-3xl mx-auto relative"
-            >
-              {/* Quote icon */}
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-                className="absolute -top-6 left-1/2 transform -translate-x-1/2"
-              >
-                <div className="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center shadow-lg">
-                  <Quote className="w-6 h-6 text-background" />
-                </div>
-              </motion.div>
+        {/* Testimonials Carousel */}
+        <motion.div className="relative" initial={{ opacity: 0, y: 50 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, delay: 0.6 }}>
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={24}
+            slidesPerView={1}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            pagination={{ clickable: true, dynamicBullets: true }}
+            navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
+            onBeforeInit={(swiper) => {
+              if (typeof swiper.params.navigation !== 'boolean') {
+                swiper.params.navigation.prevEl = prevRef.current;
+                swiper.params.navigation.nextEl = nextRef.current;
+              }
+            }}
+            breakpoints={{
+              640: { slidesPerView: 1.2, spaceBetween: 20 },
+              768: { slidesPerView: 2, spaceBetween: 28 },
+              1024: { slidesPerView: 2.5, spaceBetween: 32 },
+              1280: { slidesPerView: 3, spaceBetween: 32 },
+            }}
+            className="testimonials-swiper pb-16"
+          >
+            {testimonials.map((t, idx) => (
+              <SwiperSlide key={`${t.name}-${idx}`}>
+                <motion.div className="group relative card-metallic rounded-3xl p-6 sm:p-8 shadow-glow hover:shadow-glow transition-transform duration-500 transform hover:-translate-y-1 h-full flex flex-col">
+                  
+                  <div className="relative flex flex-col h-full z-10">
+                    <div className="flex items-center mb-4 sm:mb-6">
+                      {[...Array(t.rating)].map((_, i) => <Star key={i} className="w-5 h-5 text-yellow-400 mr-1" style={{ filter: 'drop-shadow(0 0 4px rgba(234,179,8,0.5))' }} />)}
+                    </div>
 
-              {/* Testimonial content */}
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                className="text-lg md:text-xl leading-relaxed mb-8 text-foreground italic"
-              >
-                "{testimonials[currentIndex].content}"
-              </motion.p>
+                    <div className="mb-4 sm:mb-6">
+                      <span className="inline-block px-3 py-1 border border-foreground/20 text-foreground/70 text-sm font-semibold rounded-full">{t.service}</span>
+                    </div>
 
-              {/* User info */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.6 }}
-                className="flex items-center justify-center space-x-4"
-              >
-                <div className="text-4xl">{testimonials[currentIndex].image}</div>
-                <div className="text-left">
-                  <div className="font-bold text-lg metallic-text">
-                    {testimonials[currentIndex].name}
+                    <div className="mb-6 sm:mb-8 flex-1">
+                      <div className="text-4xl sm:text-5xl text-foreground/30 mb-3 sm:mb-4 font-serif">"</div>
+                      <p className="text-foreground text-base sm:text-lg leading-relaxed italic">{t.comment}</p>
+                    </div>
+
+                    <div className="border-t border-foreground/10 pt-4 sm:pt-6">
+                      <div className="flex items-center">
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-accent to-accent/70 rounded-full flex items-center justify-center mr-3 sm:mr-4 shadow-glow">
+                          <span className="text-foreground font-bold text-lg sm:text-xl">{t.name.charAt(0)}</span>
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-foreground text-base sm:text-lg">{t.name}</h4>
+                          {t.company && <p className="text-foreground/70 text-sm font-medium">{t.company}</p>}
+                          <p className="text-foreground/50 text-sm">{t.location}</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    {testimonials[currentIndex].role} • {testimonials[currentIndex].location}
-                  </div>
-                  <div className="flex items-center mt-1">
-                    {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+                </motion.div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
-        {/* Navigation dots */}
-        <div className="flex justify-center space-x-3 mt-12">
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentIndex
-                  ? 'bg-accent shadow-glow scale-125'
-                  : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
-              }`}
-            />
-          ))}
-        </div>
-
-        {/* Small testimonials preview */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          {testimonials.slice(0, 2).map((testimonial, index) => (
-            <motion.div
-              key={index}
-              className="bg-card/50 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-accent/30 transition-all duration-300"
-              whileHover={{ scale: 1.02, y: -4 }}
-            >
-              <div className="flex items-center mb-3">
-                <span className="text-2xl mr-3">{testimonial.image}</span>
-                <div>
-                  <div className="font-semibold text-sm">{testimonial.name}</div>
-                  <div className="text-xs text-muted-foreground">{testimonial.location}</div>
-                </div>
-              </div>
-              <p className="text-sm text-muted-foreground italic">
-                "{testimonial.content.slice(0, 100)}..."
-              </p>
-              <div className="flex items-center mt-2">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                ))}
-              </div>
-            </motion.div>
-          ))}
+          {/* Setas customizadas azul neon */}
+          <div ref={prevRef} className="absolute top-1/2 left-4 z-20 transform -translate-y-1/2 cursor-pointer bg-accent/20 rounded-full w-12 h-12 flex items-center justify-center shadow-glow hover:bg-accent transition-transform duration-300">
+            <svg className="w-6 h-6 stroke-foreground" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </div>
+          <div ref={nextRef} className="absolute top-1/2 right-4 z-20 transform -translate-y-1/2 cursor-pointer bg-accent/20 rounded-full w-12 h-12 flex items-center justify-center shadow-glow hover:bg-accent transition-transform duration-300">
+            <svg className="w-6 h-6 stroke-foreground" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </div>
         </motion.div>
       </div>
     </section>
   );
 };
-
-export default TestimonialsSection;
