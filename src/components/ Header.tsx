@@ -6,7 +6,7 @@ export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const whatsappNumber = "5511999999999";
+  const whatsappNumber = "19991195261";
 
   useEffect(() => {
     const handleScroll = () => {

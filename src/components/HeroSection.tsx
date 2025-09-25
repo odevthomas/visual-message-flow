@@ -5,7 +5,7 @@ export const HeroSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true });
 
-  const whatsappNumber = "5511999999999";
+  const whatsappNumber = "19991195261";
   const whatsappMessage = encodeURIComponent(
     "Olá! Preciso de assistência técnica para minha geladeira. Gostaria de agendar um atendimento."
   );

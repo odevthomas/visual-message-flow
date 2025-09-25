@@ -2,175 +2,520 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Bras Service - Premium Dark Design System with Neon Accents 
-All colors MUST be HSL.
-*/
+/* ============================
+   VARIÁVEIS DE CORES E FONTES
+============================ */
+:root {
+  --color-bg: #000000;
+  --color-primary: #10b981; /* Verde emerald */
+  --color-primary-dark: #b9bcbb;
+  --color-secondary: #2563eb; /* Azul para contraste */
+  --color-accent: #f5f5f5; /* Amarelo para destaques */
+  --color-gray-light: #d1d5db;
+  --color-gray-medium: #4b5563;
+  --color-gray-dark: #1f2937; /* Mais escuro para elementos internos */
+  --color-white: #ffffff;
+  --color-text-light: #e5e7eb; /* Texto mais claro */
 
-@layer base {
-  :root {
-    /* Metallic dark blue theme inspired by automotive finish */
-    --background: 210 45% 8%; /* Deep metallic blue */
-    --foreground: 0 0% 98%; /* Pure white text */
+  --font-heading: 'Satoshi', sans-serif;
+  --font-body: 'Inter', sans-serif; /* Considerando que Inter seja sua fonte principal para o corpo */
+}
 
-    --card: 210 40% 12%; /* Darker metallic blue cards */
-    --card-foreground: 0 0% 98%;
+/* ============================
+   BASE & GLOBAL EFFECTS
+============================ */
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text-light);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Evita scroll horizontal em animações */
+  background-image: radial-gradient(at 20% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+                    radial-gradient(at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  animation: background-pulse 15s infinite alternate ease-in-out;
+}
 
-    --popover: 210 40% 12%;
-    --popover-foreground: 0 0% 98%;
+@keyframes background-pulse {
+  0% { background-size: 100% 100%; }
+  50% { background-size: 110% 110%; }
+  100% { background-size: 100% 100%; }
+}
 
-    /* Brand colors - vibrant accents on dark metallic */
-    --primary: 210 85% 45%; /* Metallic blue primary */
-    --primary-foreground: 0 0% 98%;
+/* Classes para animação de fade-in ao rolar */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
 
-    --secondary: 120 75% 45%; /* Vibrant green like the reference */
-    --secondary-foreground: 0 0% 98%;
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    --accent: 210 90% 65%; /* Light metallic blue accent */
-    --accent-foreground: 210 45% 8%;
 
-    --destructive: 0 85% 55%;
-    --destructive-foreground: 0 0% 98%;
+/* ============================
+   HEADINGS
+============================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-white);
+  margin: 0;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Sombra sutil para destaque */
+}
 
-    --muted: 210 25% 20%;
-    --muted-foreground: 210 15% 70%;
+h2 {
+ h2 {
+  line-height: 1.2;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 100%;
+}
 
-    --border: 210 25% 25%;
-    --input: 210 40% 15%;
-    --ring: 210 85% 45%;
+}
 
-    --radius: 1rem; /* More rounded for modern look */
+@keyframes gradient-text-shift {
+  to { background-position: 200% center; }
+}
 
-    /* Metallic automotive-inspired gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(210 85% 45%), hsl(210 90% 65%), hsl(210 80% 35%));
-    --gradient-hero: linear-gradient(135deg, hsl(210 45% 8% / 0.95), hsl(210 85% 15% / 0.8), hsl(210 90% 25% / 0.3));
-    --gradient-card: linear-gradient(145deg, hsl(210 40% 12%), hsl(210 35% 18%), hsl(210 40% 12%));
-    --gradient-metallic: linear-gradient(45deg, hsl(210 80% 20%), hsl(210 90% 40%), hsl(210 85% 25%));
-    --gradient-green: linear-gradient(135deg, hsl(120 75% 45%), hsl(120 80% 55%));
 
-    /* Sophisticated shadows with metallic glow */
-    --shadow-primary: 0 8px 32px hsl(210 85% 45% / 0.3);
-    --shadow-green: 0 8px 32px hsl(120 75% 45% / 0.3);
-    --shadow-card: 0 4px 20px hsl(210 45% 8% / 0.4);
-    --shadow-glow: 0 0 40px hsl(210 90% 65% / 0.2);
+/* ============================
+   BOTÕES & LINKS
+============================ */
+button, .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  font-weight: 600;
+  border-radius: 1rem;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transição mais suave */
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
 
-    /* Animation variables */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+.btn-primary {
+  background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary));
+  color: var(--color-white);
+  padding: 0.85rem 1.8rem; /* Um pouco maior */
+  box-shadow: 0 10px 25px rgba(16,185,129,0.4);
+}
 
-    --sidebar-background: 0 0% 98%;
+.btn-primary:hover {
+  box-shadow: 0 15px 35px rgba(16,185,129,0.7); /* Sombra mais intensa */
+  transform: translateY(-3px) scale(1.02); /* Leve levantamento e escala */
+}
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+/* Efeito de brilho no hover */
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: skewX(-30deg);
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: -1;
+}
 
-    --sidebar-primary: 240 5.9% 10%;
+.btn-primary:hover::before {
+  left: 100%;
+}
 
-    --sidebar-primary-foreground: 0 0% 98%;
 
-    --sidebar-accent: 240 4.8% 95.9%;
+/* ============================
+   BENTO CTA CARDS
+============================ */
+.bento-card {
+  background-color: var(--color-gray-dark); /* Fundo um pouco mais escuro para contraste */
+  border: 1px solid #2d2d2d;
+  border-radius: 2rem;
+  padding: 2.5rem; /* Mais espaçamento interno */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
+.bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 2rem;
+  padding: 1px; /* Espessura do "glow" */
+  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
 
-    --sidebar-border: 220 13% 91%;
+.bento-card:hover::before {
+  opacity: 1;
+}
 
-    --sidebar-ring: 217.2 91.2% 59.8%;
+.bento-card:hover {
+  transform: translateY(-5px) scale(1.01); /* Leve levantamento */
+  border-color: var(--color-primary); /* Borda primária no hover */
+  box-shadow: 0 15px 30px rgba(16,185,129,0.2); /* Sombra sutil */
+}
+
+.bento-card .icon-wrapper {
+  background-color: rgba(255, 255, 255, 0.08); /* Fundo do ícone mais sutil */
+  border-radius: 1.25rem; /* Um pouco mais arredondado */
+  padding: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.bento-card:hover .icon-wrapper {
+  background-color: rgba(16, 185, 129, 0.2); /* Cor da marca no hover */
+}
+
+.bento-card svg, .bento-card img {
+  width: 2.5rem; /* Tamanho mais controlado */
+  height: 2.5rem;
+  color: var(--color-primary); /* Ícones Lucide com a cor primária */
+  transition: color 0.3s ease;
+}
+
+.bento-card:hover svg {
+  color: var(--color-white); /* Ícone branco no hover */
+}
+
+.bento-card h3 {
+  font-size: 1.5rem; /* Um pouco maior */
+  margin-bottom: 0.5rem;
+}
+
+.bento-card p {
+  font-size: 1rem;
+  color: var(--color-gray-light);
+}
+
+/* Estrelas do Google */
+.bento-card .star-rating svg {
+  width: 1.25rem; /* Estrelas menores */
+  height: 1.25rem;
+  fill: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Badge de "Online Agora" */
+.bento-card .online-badge {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.bento-card .online-badge::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--color-white);
+  border-radius: 50%;
+  animation: pulse-ring 1.5s cubic-bezier(0.2, 0, 0.8, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: scale(1.2); opacity: 0; }
+}
+
+
+/* ============================
+   FAQ
+============================ */
+.faq-section {
+  padding: 4rem 1rem; /* Mais espaçamento */
+  max-width: 900px; /* Um pouco mais largo */
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--color-gray-dark);
+  border: 1px solid rgba(255,255,255,0.15); /* Borda mais visível */
+  border-radius: 1.5rem;
+  margin-bottom: 1.25rem; /* Mais espaçamento entre itens */
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.faq-item:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 25px rgba(16,185,129,0.3);
+  transform: translateY(-2px);
+}
+
+.faq-item button {
+  width: 100%;
+  text-align: left;
+  padding: 1.25rem 2rem; /* Mais padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 1.125rem; /* Texto maior */
+}
+
+.faq-item button:hover {
+  background: rgba(16,185,129,0.08); /* Fundo sutil da cor primária no hover */
+}
+
+.faq-item .arrow-icon {
+  transition: transform 0.3s ease;
+}
+
+.faq-item.open .arrow-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  padding: 0 2rem 1.5rem 2rem; /* Mais padding e alinhamento */
+  color: var(--color-gray-light);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* ============================
+   MARQUEE / CLIENTES / MARCAS
+============================ */
+.marquee-container {
+  overflow: hidden;
+  position: relative;
+  padding: 3rem 0;
+  background-color: var(--color-bg); /* Garante que o fundo seja preto */
+  border-top: 1px solid #2d2d2d;
+  border-bottom: 1px solid #2d2d2d;
+}
+
+.marquee-content {
+  display: flex;
+  width: fit-content; /* Permite que o conteúdo exceda a largura */
+  animation: marquee-scroll 30s linear infinite; /* Ajuste a duração conforme necessário */
+}
+
+.marquee-content:hover {
+  animation-play-state: paused; /* Pausa no hover */
+}
+
+.marquee .item {
+  flex-shrink: 0; /* Impede que os itens encolham */
+  margin: 0 2rem; /* Espaçamento entre os logos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marquee .item img {
+  width: 7rem; /* Tamanho médio */
+  height: 7rem;
+  object-fit: contain;
+  transition: filter 0.4s ease, opacity 0.4s ease, transform 0.3s ease;
+  filter: grayscale(100%) brightness(0.7); /* Mais sutil e escurecido */
+  opacity: 0.7;
+}
+
+.marquee .item img:hover {
+  filter: none; /* Cores originais */
+  opacity: 1;
+  transform: scale(1.1); /* Efeito de zoom */
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* Rola até a metade para um loop suave */
+}
+
+/* Para garantir um loop infinito, o conteúdo precisa ser duplicado no HTML/JSX */
+/* Ex: <div class="marquee-content"> {logos} {logos} </div> */
+
+
+/* ============================
+   FOOTER
+============================ */
+footer {
+  background-color: var(--color-gray-dark); /* Fundo mais escuro */
+  border-top: 1px solid #2d2d2d;
+  padding: 3rem 1.5rem; /* Mais padding */
+  font-size: 0.9rem;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem; /* Mais espaço entre colunas */
+  align-items: flex-start; /* Alinha no topo */
+}
+
+.footer-logo {
+  max-width: 150px; /* Tamanho do logo no footer */
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.footer-section h4 {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary); /* Títulos em destaque */
+}
+
+.footer-section p, .footer-section a {
+  color: var(--color-gray-light);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: var(--color-white);
+  text-decoration: underline;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column; /* Colunas para melhor organização */
+  gap: 0.75rem;
+}
+
+.footer-contact span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-gray-light);
+}
+
+.footer-contact svg {
+  color: var(--color-primary);
+  width: 1rem;
+  height: 1rem;
+}
+
+.footer-social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.footer-social-links a {
+  color: var(--color-gray-light);
+  font-size: 1.5rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social-links a:hover {
+  color: var(--color-white);
+  transform: translateY(-3px);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #2d2d2d;
+  color: var(--color-gray-medium);
+}
+
+/* ============================
+   BOTÃO WHATSAPP FLUTUANTE
+============================ */
+@keyframes whatsapp-wave {
+  0% { transform: translateY(0) rotate(0deg); }
+  10% { transform: translateY(-2px) rotate(-3deg); }
+  20% { transform: translateY(2px) rotate(3deg); }
+  30% { transform: translateY(-2px) rotate(-2deg); }
+  40% { transform: translateY(2px) rotate(2deg); }
+  50% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* ============================
+   RESPONSIVIDADE
+============================ */
+@media (max-width: 767px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
   }
-
-  .light {
-    /* Light theme fallback - same dark theme for consistency */
-    --background: 0 0% 8%;
-    --foreground: 0 0% 98%;
+  .footer-section {
+    width: 100%;
+    align-items: center;
+  }
+  .footer-social-links {
+    justify-content: center;
+  }
+  h2 {
+    font-size: 2.5rem; /* Ajuste para mobile */
+  }
+  .bento-card {
+    padding: 2rem;
+  }
+  .bento-card h3 {
+    font-size: 1.25rem;
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
+@media (min-width: 768px) {
+  .marquee .item img {
+    width: 8rem;
+    height: 8rem;
   }
 
-  body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', 'SF Pro Display', -apple-system, system-ui, sans-serif;
+  .floating-whatsapp {
+    width: 5rem;
+    height: 5rem;
+  }
+  .floating-whatsapp svg {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .marquee .item img {
+    width: 10rem;
+    height: 10rem;
   }
 
-  /* Modern rounded fonts */
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', 'SF Pro Display', -apple-system, system-ui, sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: hsl(var(--foreground));
+  .floating-whatsapp {
+    width: 6rem;
+    height: 6rem;
   }
-
-  /* Utility classes for metallic design */
-  .metallic-text {
-    color: hsl(var(--foreground));
-    text-shadow: 0 1px 2px hsl(210 45% 8% / 0.8);
-  }
-  
-  .accent-glow {
-    color: hsl(var(--accent));
-    text-shadow: 0 0 20px hsl(var(--accent) / 0.5);
-  }
-  
-  .green-glow {
-    color: hsl(var(--secondary));
-    text-shadow: 0 0 20px hsl(var(--secondary) / 0.4);
-  }
-
-  .gradient-text {
-    background: var(--gradient-metallic);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .card-metallic {
-    background: var(--gradient-card);
-    border: 1px solid hsl(var(--border));
-    box-shadow: var(--shadow-card);
-  }
-
-  .pulse-neon {
-    animation: pulse-neon 2s infinite;
-  }
-
-  @keyframes pulse-neon {
-    0%, 100% {
-      box-shadow: var(--shadow-blue);
-    }
-    25% {
-      box-shadow: var(--shadow-green);
-    }
-    50% {
-      box-shadow: var(--shadow-orange);
-    }
-    75% {
-      box-shadow: var(--shadow-red);
-    }
-  }
-
-  .parallax-bg {
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
-  /* Scrollbar styling */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
-  }
-
-  /* Performance optimizations */
-  * {
-    @apply transform-gpu;
+  .floating-whatsapp svg {
+    width: 3.5rem;
+    height: 3.5rem;
   }
 }
