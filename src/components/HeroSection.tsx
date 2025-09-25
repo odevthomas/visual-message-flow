@@ -19,10 +19,14 @@ export const HeroSection: React.FC = () => {
       ref={containerRef}
       className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-20 overflow-hidden"
     >
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/src/assets/hero-bg.jpg')" }}
+      {/* Vídeo de Fundo */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        src="/src/assets/videohero.mp4" // Mude para o caminho do seu vídeo
+        autoPlay
+        loop
+        muted
+        playsInline // Importante para iOS, para que o vídeo toque automaticamente
       />
 
       {/* Dark Overlay */}
