@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-black border-t border-gray-800 py-10">
+    <footer className="bg-black/50  border-t border-gray-800 py-10">
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
 
         {/* Logo */}

@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, MapPin, Clock, CheckCircle, ArrowRight } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 
-// Importe a imagem de fundo para o parallax
-import refrigerationBackground from '../assets/hero-metallic-bg.jpg'; 
+// Importe a imagem de fundo para o parallax e a nova imagem do CTA
+import technicianImage from '../assets/manutencao.webp'; // Usando um nome de arquivo genérico
 
 interface FAQ {
   question: string;
@@ -52,17 +53,8 @@ export const FAQSection: React.FC = () => {
       className="py-12 sm:py-16 md:py-20 text-white relative overflow-hidden"
       id="faq"
     >
-      {/* Imagem de Fundo com Parallax e sobreposição escura */}
-      <div 
-        className="absolute inset-0 bg-cover bg-fixed bg-center" 
-        style={{ backgroundImage: `url(${refrigerationBackground})` }}
-      >
-      </div>
-      <div className="absolute inset-0 bg-black opacity-80 z-10"></div>
-
-      {/* Gradiente de Sombra Azul */}
-      <div className="absolute inset-0 z-20" style={{
-background: 'radial-gradient(circle at center, rgba(0, 11, 29, 0.92) 0%, rgba(0, 0, 0, 1) 100%)'         }}></div>
+      {/* Fundo com o mesmo gradiente do HeroSection */}
+      <div className="absolute inset-0 -z-10 h-full w-full [background:radial-gradient(125%_125%_at_50%_10%,#1b3e84_20%,#000_80%)]"></div>
 
       {/* Conteúdo Principal */}
       <div className="relative z-30">
@@ -87,14 +79,14 @@ background: 'radial-gradient(circle at center, rgba(0, 11, 29, 0.92) 0%, rgba(0,
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
-              className="group backdrop-blur-lg bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-lg hover:shadow-gray-500/10 transition-all duration-500"
+              className="group backdrop-blur-sm bg-black/50 border border-white/10 rounded-2xl overflow-hidden shadow-lg hover:shadow-gray-500/10 transition-all duration-500"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full px-4 sm:px-6 py-3 sm:py-4 text-left flex items-center justify-between hover:bg-white/5 transition-colors duration-300 focus:outline-none relative z-10"
+                className="w-full px-4 sm:px-6 py-3 sm:py-4 text-left flex items-center justify-between hover:bg-black/50 transition-colors duration-300 focus:outline-none relative z-10"
               >
                 <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white pr-4 group-hover:text-gray-200 transition-colors duration-300">
                   {faq.question}
@@ -125,7 +117,7 @@ background: 'radial-gradient(circle at center, rgba(0, 11, 29, 0.92) 0%, rgba(0,
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: -8, opacity: 0 }}
                         transition={{ duration: 0.3, delay: 0.05 }}
-                        className="backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4"
+                        className="backdrop-blur-sm bg-black/50 border border-white/10 rounded-xl p-3 sm:p-4"
                       >
                         <p className="text-gray-200 leading-relaxed text-sm sm:text-base">
                           {faq.answer}
@@ -139,42 +131,66 @@ background: 'radial-gradient(circle at center, rgba(0, 11, 29, 0.92) 0%, rgba(0,
           ))}
         </div>
 
-        {/* CTA */}
+        {/* Novo CTA com imagem e informações de serviço */}
         <motion.div
-          className="text-center mt-12 sm:mt-14 md:mt-20"
+          className="mt-12 sm:mt-14 md:mt-20 max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <div className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-3xl p-8 sm:p-10 md:p-14 shadow-xl max-w-xl mx-auto">
-            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-              Ainda tem dúvidas?
-            </h3>
-            <p className="text-gray-300 mb-6 sm:mb-8 text-base sm:text-lg">
-              Nossa equipe está pronta para esclarecer qualquer questão e fornecer o melhor atendimento personalizado
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                onClick={() => {
-                  const whatsappNumber = "5511999999999";
-                  const message = encodeURIComponent("Olá! Tenho algumas dúvidas sobre os serviços da Bras Service. Podem me ajudar?");
-                  window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
-                }}
-                className="inline-flex items-center justify-center px-6 sm:px-7 md:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-600 to-emerald-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden text-base sm:text-lg"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Tirar Dúvidas no WhatsApp
-              </motion.button>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center rounded-3xl overflow-hidden backdrop-blur-lg bg-black/50 border border-white/10 shadow-xl p-6 sm:p-10">
+            {/* Imagem do Técnico */}
+            <div className="h-64 sm:h-80 lg:h-full lg:order-1">
+              <img
+                src={technicianImage}
+                alt="Técnico de refrigeração em ação"
+                className="w-full h-full object-cover rounded-2xl"
+              />
+            </div>
+
+            {/* Informações e Botão */}
+            <div className="p-2 lg:p-0 text-center lg:text-left">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+                Pronto para Agendar seu Atendimento?
+              </h3>
+              <p className="text-gray-300 mb-6 sm:mb-8 text-base sm:text-lg">
+                Conte com uma equipe especializada e pronta para te atender em Campinas e região.
+              </p>
               
-              <motion.button
-                onClick={() => window.open("tel:+5511999999999", "_self")}
-                className="inline-flex items-center justify-center px-6 sm:px-7 md:px-8 py-3 sm:py-4 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden text-base sm:text-lg"
+              <div className="space-y-3 sm:space-y-4 mb-8 text-gray-400 text-sm sm:text-base">
+                {/* Ícones e texto agora alinhados e responsivos */}
+                <div className="flex items-center gap-3 justify-center lg:justify-start">
+                  <div className="w-8 h-8 flex items-center justify-center flex-shrink-0 rounded-full bg-blue-500/10">
+                    <Clock className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <span className="text-gray-300">Atendimento 24h, 7 dias por semana</span>
+                </div>
+                <div className="flex items-center gap-3 justify-center lg:justify-start">
+                  <div className="w-8 h-8 flex items-center justify-center flex-shrink-0 rounded-full bg-blue-500/10">
+                    <MapPin className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <span className="text-gray-300">Chegamos em até 2 horas para emergências</span>
+                </div>
+                <div className="flex items-center gap-3 justify-center lg:justify-start">
+                  <div className="w-8 h-8 flex items-center justify-center flex-shrink-0 rounded-full bg-blue-500/10">
+                    <CheckCircle className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <span className="text-gray-300">Orçamento gratuito no local</span>
+                </div>
+              </div>
+
+              <motion.a
+                href={`https://wa.me/551991195261?text=${encodeURIComponent("Olá! Gostaria de agendar um atendimento.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden text-base sm:text-lg gap-2"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Ligar Agora
-              </motion.button>
+                <FaWhatsapp className="w-5 h-5" />
+                Agendar via WhatsApp
+                <ArrowRight className="w-4 h-4" />
+              </motion.a>
             </div>
           </div>
         </motion.div>

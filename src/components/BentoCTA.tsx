@@ -13,27 +13,17 @@ const BentoCTA: React.FC = () => {
 
   return (
     <section className="relative py-24 text-white overflow-hidden">
-      {/* Imagem de Fundo com Parallax e sobreposição escura */}
-      <div 
-        className="absolute inset-0 bg-cover bg-fixed bg-center" 
-        style={{ backgroundImage: `url(${refrigerationBackground})` }}
-      >
-      </div>
-      
-      <div className="absolute inset-0 bg-black opacity-80 z-10"></div>
-
-      {/* Gradiente de Sombra Azul */}
-      <div className="absolute inset-0 z-20" style={{
-background: 'radial-gradient(circle at center, rgba(0, 11, 29, 0.92) 0%, rgba(0, 0, 0, 1) 100%)'      }}></div>
+      {/* Fundo com gradiente branco */}
+      <div className="absolute inset-0 -z-10 h-full w-full [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#fff_100%)]"></div>
 
       {/* Conteúdo Principal */}
       <div className="max-w-7xl mx-auto px-6 relative z-30">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+          <h2 className="text-4xl md:text-6xl font-bold text-black leading-tight">
             Atendimento que transforma
           </h2>
-          <p className="mt-6 text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Mais de 2.000 clientes já transformaram seus negócios conosco.
             <br />
             Peça seu orçamento e descubra por que somos referência no mercado.
@@ -44,7 +34,7 @@ background: 'radial-gradient(circle at center, rgba(0, 11, 29, 0.92) 0%, rgba(0,
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Card Avaliação Google */}
           <div className="lg:col-span-1 group relative">
-            <div className="relative bg-gray-800/50 border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all duration-300 group-hover:scale-[1.02] flex flex-col justify-between h-full">
+            <div className="relative bg-gray-100/60 border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all duration-300 group-hover:scale-[1.02] flex flex-col justify-between h-full">
               <div>
                 {/* Ícone Google */}
                 <div className="flex items-center justify-center mb-6">
@@ -89,17 +79,17 @@ background: 'radial-gradient(circle at center, rgba(0, 11, 29, 0.92) 0%, rgba(0,
                       />
                     ))}
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">
+                  <h3 className="text-2xl font-bold text-black mb-2">
                     {rating.toFixed(1)} no Google
                   </h3>
-                  <p className="text-gray-400">
+                  <p className="text-gray-600">
                     Baseado em +2.000 avaliações reais
                   </p>
                 </div>
               </div>
 
               {/* BOTÃO AZUL */}
-              <button className="w-full bg-brand-blue text-white font-bold px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2">
+              <button className="w-full bg-blue-600 text-white font-bold px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2">
                 Ver depoimentos
                 <ArrowRight className="w-4 h-4" />
               </button>
@@ -108,7 +98,7 @@ background: 'radial-gradient(circle at center, rgba(0, 11, 29, 0.92) 0%, rgba(0,
 
           {/* Card Orçamento */}
           <div className="group relative">
-            <div className="relative h-full bg-gray-800/50 border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all duration-300 group-hover:scale-[1.02] flex flex-col justify-between">
+            <div className="relative h-full bg-gray-100/60 border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all duration-300 group-hover:scale-[1.02] flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-center mb-6">
                   <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-2xl p-2">
@@ -120,17 +110,17 @@ background: 'radial-gradient(circle at center, rgba(0, 11, 29, 0.92) 0%, rgba(0,
                   </div>
                 </div>
                 <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-white mb-2">
+                  <h3 className="text-xl font-bold text-black mb-2">
                     Orçamento Gratuito
                   </h3>
-                  <p className="text-gray-400">
+                  <p className="text-gray-600">
                     Resposta em até 30 minutos, sem burocracia
                   </p>
                 </div>
               </div>
               
               {/* BOTÃO AZUL */}
-              <button className="w-full bg-brand-blue text-white font-bold px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2">
+              <button className="w-full bg-blue-600 text-white font-bold px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2">
                 Solicitar agora
                 <ArrowRight className="w-4 h-4" />
               </button>
@@ -139,7 +129,7 @@ background: 'radial-gradient(circle at center, rgba(0, 11, 29, 0.92) 0%, rgba(0,
 
           {/* Card Atendimento */}
           <div className="group relative">
-            <div className="relative h-full bg-gray-800/50 border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all duration-300 group-hover:scale-[1.02] flex flex-col justify-between">
+            <div className="relative h-full bg-gray-100/60 border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all duration-300 group-hover:scale-[1.02] flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-center mb-6">
                   <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-2xl p-2">
@@ -173,17 +163,17 @@ background: 'radial-gradient(circle at center, rgba(0, 11, 29, 0.92) 0%, rgba(0,
                   </div>
                 </div>
                 <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-white mb-2">
+                  <h3 className="text-xl font-bold text-black mb-2">
                     Online Agora
                   </h3>
-                  <p className="text-gray-400">
+                  <p className="text-gray-600">
                     Equipe disponível para atendimento imediato
                   </p>
                 </div>
               </div>
 
               {/* BOTÃO AZUL */}
-              <button className="w-full bg-brand-blue text-white font-bold px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2">
+              <button className="w-full bg-blue-600 text-white font-bold px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2">
                 Falar no WhatsApp
                 <ArrowRight className="w-4 h-4" />
               </button>
