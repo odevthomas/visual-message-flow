@@ -1,8 +1,10 @@
 import React from "react";
 import { FaWhatsapp, FaPhoneAlt, FaEnvelope, FaArrowUp } from "react-icons/fa";
+// Importando a logo corretamente
+import brasserviceLogo from "../assets/brasservice.png";
 
 export const Footer: React.FC = () => {
-  const whatsappNumber = "19991195261";
+  const whatsappNumber = "551991195261";
 
   const handleWhatsAppClick = () => {
     const message = encodeURIComponent(
@@ -24,13 +26,12 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-black/50  border-t border-gray-800 py-10">
+    <footer className="bg-black/50 border-t border-gray-800 py-10">
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-
         {/* Logo */}
         <div className="flex items-center gap-3">
           <img
-            src="/src/assets/brasservice.png"
+            src={brasserviceLogo}
             alt="Bras Service"
             className="h-10 w-auto"
           />
@@ -39,14 +40,13 @@ export const Footer: React.FC = () => {
         {/* Contato Inline */}
         <div className="flex flex-col md:flex-row items-center gap-6 text-gray-400 text-sm">
           <span className="flex items-center gap-1">
-            <FaEnvelope /> 
+            <FaEnvelope />
             <button onClick={handleEmailClick} className="hover:text-white transition">
               bras-service@hotmail.com
             </button>
           </span>
-         
-          
-          <span className="flex items-center  text-white gap-1 cursor-pointer" onClick={scrollToTop}>
+
+          <span className="flex items-center text-white gap-1 cursor-pointer" onClick={scrollToTop}>
             <FaArrowUp /> Voltar ao topo
           </span>
         </div>
