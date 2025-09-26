@@ -6,19 +6,26 @@
    VARIÁVEIS DE CORES E FONTES
 ============================ */
 :root {
-  --color-bg: #000000;
-  --color-primary: #10b981; /* Verde emerald */
-  --color-primary-dark: #b9bcbb;
-  --color-secondary: #2563eb; /* Azul para contraste */
-  --color-accent: #f5f5f5; /* Amarelo para destaques */
+  /* Cores da referência do cliente */
+  --color-brand-blue: #0A69A2; /* Azul da logo "Bras Service" */
+  --color-brand-green: #37A843; /* Verde do botão "Agende" */
+  --color-bg-dark: #121A26; /* Azul escuro do fundo da imagem de referência */
+  
+  /* Cores neutras e de texto */
+  --color-text-light: #ffffff; /* Texto claro */
+  --color-text-dark: #333333; /* Texto escuro */
+  
+  /* Mantendo as variáveis originais para os outros elementos */
+  --color-primary: var(--color-brand-green);
+  --color-secondary: var(--color-brand-blue);
+  --color-accent: #ffcc00; /* Amarelo para destaques se precisar */
   --color-gray-light: #d1d5db;
   --color-gray-medium: #4b5563;
-  --color-gray-dark: #1f2937; /* Mais escuro para elementos internos */
+  --color-gray-dark: #1f2937;
   --color-white: #ffffff;
-  --color-text-light: #e5e7eb; /* Texto mais claro */
-
+  
   --font-heading: 'Satoshi', sans-serif;
-  --font-body: 'Inter', sans-serif; /* Considerando que Inter seja sua fonte principal para o corpo */
+  --font-body: 'Inter', sans-serif;
 }
 
 /* ============================
@@ -26,16 +33,16 @@
 ============================ */
 body {
   font-family: var(--font-body);
-  background-color: var(--color-bg);
-  color: var(--color-text-light);
+  background-color: var(--color-bg-dark); /* Usando o novo azul escuro para o fundo */
+  color: var(--color-text-light); /* Usando a nova cor de texto */
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Evita scroll horizontal em animações */
-  background-image: radial-gradient(at 20% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
-                    radial-gradient(at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  animation: background-pulse 15s infinite alternate ease-in-out;
+  overflow-x: hidden;
+  /* Removendo o gradiente de fundo original que pode conflitar */
+  /* background-image: ... */
+  /* background-repeat: ... */
+  /* background-size: ... */
+  /* animation: ... */
 }
 
 @keyframes background-pulse {
@@ -69,15 +76,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h2 {
- h2 {
   line-height: 1.2;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 100%;
+  color: var(--color-brand-blue); 
+  text-shadow: none; /* remove a sombra para h2 se precisar, já que na imagem de ref ele não tem */
 }
 
-}
 
 @keyframes gradient-text-shift {
   to { background-position: 200% center; }
@@ -102,14 +105,14 @@ button, .btn {
 }
 
 .btn-primary {
-  background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary));
+  background: var(--color-brand-green); /* Fundo sólido verde da marca */
   color: var(--color-white);
   padding: 0.85rem 1.8rem; /* Um pouco maior */
-  box-shadow: 0 10px 25px rgba(16,185,129,0.4);
+  box-shadow: 0 10px 25px rgba(55, 168, 67, 0.4); /* Sombra do botão com a cor verde da marca */
 }
 
 .btn-primary:hover {
-  box-shadow: 0 15px 35px rgba(16,185,129,0.7); /* Sombra mais intensa */
+  box-shadow: 0 15px 35px rgba(55, 168, 67, 0.7); /* Sombra mais intensa */
   transform: translateY(-3px) scale(1.02); /* Leve levantamento e escala */
 }
 
@@ -316,7 +319,7 @@ button, .btn {
   overflow: hidden;
   position: relative;
   padding: 3rem 0;
-  background-color: var(--color-bg); /* Garante que o fundo seja preto */
+  background-color: var(--color-bg-dark); /* Garante que o fundo seja o azul escuro */
   border-top: 1px solid #2d2d2d;
   border-bottom: 1px solid #2d2d2d;
 }
@@ -518,4 +521,35 @@ footer {
     width: 3.5rem;
     height: 3.5rem;
   }
+}
+/* Em seu arquivo CSS (ex: index.css ou um arquivo de estilo global) */
+
+.background-pattern {
+  /* Primeiro, o gradiente radial que já definimos */
+  background: radial-gradient(circle at center, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 1) 100%);
+  
+  /* Agora, adicionamos uma segunda camada de fundo para o padrão de pontos */
+  /* Ajuste a cor dos pontos (rgba) e o tamanho do background-size conforme desejar */
+  background-image: radial-gradient(circle, rgba(100, 116, 139, 0.15) 1px, transparent 1px);
+  background-size: 25px 25px; /* Define o espaçamento entre os pontos */
+  background-position: center center; /* Centraliza o padrão */
+  
+  /* Importante: para ter múltiplas imagens de fundo, separe com vírgula.
+     O primeiro item na lista é a camada superior. */
+  background: 
+    radial-gradient(circle, rgba(100, 116, 139, 0.08) 1px, transparent 1px) center center / 25px 25px, /* Pontos sutis */
+    radial-gradient(circle at center, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 1) 100%); /* Seu gradiente principal */
+}
+
+/* Se quiser um padrão de linhas diagonais muito sutil */
+.background-pattern-lines {
+  background: 
+    repeating-linear-gradient(
+      -45deg,
+      rgba(100, 116, 139, 0.05),
+      rgba(100, 116, 139, 0.05) 1px,
+      transparent 1px,
+      transparent 20px /* Ajuste para espaçamento das linhas */
+    ) center center / 40px 40px, /* Tamanho do "azulejo" do padrão */
+    radial-gradient(circle at center, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 1) 100%);
 }

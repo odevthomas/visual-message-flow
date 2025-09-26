@@ -2,6 +2,9 @@ import React from "react";
 import { Star, StarHalf, StarOff, ArrowRight } from "lucide-react";
 import financeIcon from "@/assets/icons/finace.png";
 
+// Importe a imagem de fundo para o parallax
+import refrigerationBackground from '../assets/hero-metallic-bg.jpg'; 
+
 const BentoCTA: React.FC = () => {
   const rating = 4.7; // nota dinâmica
   const fullStars = Math.floor(rating);
@@ -9,14 +12,28 @@ const BentoCTA: React.FC = () => {
   const emptyStars = 5 - fullStars - (hasHalf ? 1 : 0);
 
   return (
-    <section className="py-24 bg-black relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 relative">
+    <section className="relative py-24 text-white overflow-hidden">
+      {/* Imagem de Fundo com Parallax e sobreposição escura */}
+      <div 
+        className="absolute inset-0 bg-cover bg-fixed bg-center" 
+        style={{ backgroundImage: `url(${refrigerationBackground})` }}
+      >
+      </div>
+      
+      <div className="absolute inset-0 bg-black opacity-80 z-10"></div>
+
+      {/* Gradiente de Sombra Azul */}
+      <div className="absolute inset-0 z-20" style={{
+background: 'radial-gradient(circle at center, rgba(0, 11, 29, 0.92) 0%, rgba(0, 0, 0, 1) 100%)'      }}></div>
+
+      {/* Conteúdo Principal */}
+      <div className="max-w-7xl mx-auto px-6 relative z-30">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
             Atendimento que transforma
           </h2>
-          <p className="mt-6 text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="mt-6 text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Mais de 2.000 clientes já transformaram seus negócios conosco.
             <br />
             Peça seu orçamento e descubra por que somos referência no mercado.
@@ -27,7 +44,7 @@ const BentoCTA: React.FC = () => {
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Card Avaliação Google */}
           <div className="lg:col-span-1 group relative">
-            <div className="relative bg-black border border-gray-800 rounded-3xl p-8 hover:border-gray-700 transition-all duration-300 group-hover:scale-[1.02] flex flex-col justify-between h-full">
+            <div className="relative bg-gray-800/50 border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all duration-300 group-hover:scale-[1.02] flex flex-col justify-between h-full">
               <div>
                 {/* Ícone Google */}
                 <div className="flex items-center justify-center mb-6">
@@ -59,16 +76,16 @@ const BentoCTA: React.FC = () => {
                     {Array.from({ length: fullStars }).map((_, i) => (
                       <Star
                         key={`full-${i}`}
-                        className="w-5 h-5 text-yellow-400 fill-yellow-400"
+                        className="w-5 h-5 text-yellow-500 fill-yellow-500"
                       />
                     ))}
                     {hasHalf && (
-                      <StarHalf className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                      <StarHalf className="w-5 h-5 text-yellow-500 fill-yellow-500" />
                     )}
                     {Array.from({ length: emptyStars }).map((_, i) => (
                       <StarOff
                         key={`empty-${i}`}
-                        className="w-5 h-5 text-gray-600"
+                        className="w-5 h-5 text-gray-400"
                       />
                     ))}
                   </div>
@@ -81,7 +98,8 @@ const BentoCTA: React.FC = () => {
                 </div>
               </div>
 
-              <button className="w-full bg-gradient-to-r from-green-600 to-emerald-700 text-white font-bold px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2">
+              {/* BOTÃO AZUL */}
+              <button className="w-full bg-brand-blue text-white font-bold px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2">
                 Ver depoimentos
                 <ArrowRight className="w-4 h-4" />
               </button>
@@ -90,7 +108,7 @@ const BentoCTA: React.FC = () => {
 
           {/* Card Orçamento */}
           <div className="group relative">
-            <div className="relative h-full bg-black border border-gray-800 rounded-3xl p-8 hover:border-gray-700 transition-all duration-300 group-hover:scale-[1.02] flex flex-col justify-between">
+            <div className="relative h-full bg-gray-800/50 border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all duration-300 group-hover:scale-[1.02] flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-center mb-6">
                   <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-2xl p-2">
@@ -110,8 +128,9 @@ const BentoCTA: React.FC = () => {
                   </p>
                 </div>
               </div>
-
-              <button className="w-full bg-gradient-to-r from-green-600 to-emerald-700 text-white font-bold px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2">
+              
+              {/* BOTÃO AZUL */}
+              <button className="w-full bg-brand-blue text-white font-bold px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2">
                 Solicitar agora
                 <ArrowRight className="w-4 h-4" />
               </button>
@@ -120,7 +139,7 @@ const BentoCTA: React.FC = () => {
 
           {/* Card Atendimento */}
           <div className="group relative">
-            <div className="relative h-full bg-black border border-gray-800 rounded-3xl p-8 hover:border-gray-700 transition-all duration-300 group-hover:scale-[1.02] flex flex-col justify-between">
+            <div className="relative h-full bg-gray-800/50 border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all duration-300 group-hover:scale-[1.02] flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-center mb-6">
                   <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-2xl p-2">
@@ -163,7 +182,8 @@ const BentoCTA: React.FC = () => {
                 </div>
               </div>
 
-              <button className="w-full bg-gradient-to-r from-green-600 to-emerald-700 text-white font-bold px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2">
+              {/* BOTÃO AZUL */}
+              <button className="w-full bg-brand-blue text-white font-bold px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2">
                 Falar no WhatsApp
                 <ArrowRight className="w-4 h-4" />
               </button>

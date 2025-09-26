@@ -1,0 +1,70 @@
+import React from "react";
+import { motion } from "framer-motion";
+
+// Logos e imagens (Certifique-se de que os caminhos estão corretos)
+import miniExtraLogo from "../assets/clients/mini-extra.png";
+import diaLogo from "../assets/clients/dia.png";
+import castaneaLogo from "../assets/clients/castanea.png";
+import abigailLogo from "../assets/clients/abigail.png";
+import meliaLogo from "../assets/clients/melia.png";
+import francoLogo from "../assets/clients/franco.png";
+import paoDeQueijoLogo from "../assets/clients/pao-de-queijo.png";
+import grilettoLogo from "../assets/clients/griletto.png";
+
+// ===== Marquee Component (Pode ser um componente separado ou mantido aqui) =====
+const Marquee = ({ children, duration = 35 }) => ( // Duração ligeiramente diferente para variação
+  <div className="overflow-hidden relative w-full">
+    <motion.div
+      className="flex w-max"
+      animate={{ x: ["0%", "-50%"] }}
+      transition={{ repeat: Infinity, duration, ease: "linear" }}
+    >
+      {children}
+      {children}
+    </motion.div>
+  </div>
+);
+
+// ===== Clients Section Component =====
+export const ClientsSection: React.FC = () => {
+  const clients = [
+    { name: "Mini Mercado Extra", logo: miniExtraLogo },
+    { name: "Dia%", logo: diaLogo },
+    { name: "Restaurante Castanea", logo: castaneaLogo },
+    { name: "Abigail Coffee Co.", logo: abigailLogo },
+    { name: "Melia Hotels", logo: meliaLogo },
+    { name: "Franco do Amaral", logo: francoLogo },
+    { name: "Pão de Queijo & Cia", logo: paoDeQueijoLogo },
+    { name: "Griletto", logo: grilettoLogo },
+  ];
+
+  return (
+    <section className="py-16 sm:py-20 md:py-24 text-white relative overflow-hidden">
+      {/* Gradiente de Fundo Global */}
+      <div className="absolute inset-0 z-10" style={{
+background: 'radial-gradient(circle at center, rgba(0, 11, 29, 0.92) 0%, rgba(0, 0, 0, 1) 100%)'     
+      }}></div>
+
+      <div className="container mx-auto px-4 sm:px-6 relative z-20 text-center">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">Clientes Parceiros</h2>
+        <p className="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto mb-12">
+          Empresas e marcas que confiam no nosso trabalho para fortalecer sua presença e resultados.
+        </p>
+
+        <Marquee duration={35}>
+          {clients.map((client, index) => (
+            <div key={index} className="flex-shrink-0 w-32 sm:w-40 md:w-48 h-24 sm:h-32 md:h-36 flex items-center justify-center px-4 py-2 relative group">
+              {/* Efeito de brilho no fundo no hover */}
+              <div className="absolute inset-0 bg-brand-blue/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              <img
+                src={client.logo}
+                alt={client.name}
+                className="max-w-[80%] max-h-[80%] object-contain transition-all duration-300 filter grayscale invert opacity-70 group-hover:filter-none group-hover:opacity-100 group-hover:scale-105" // Filtro mais sutil e com hover
+              />
+            </div>
+          ))}
+        </Marquee>
+      </div>
+    </section>
+  );
+};

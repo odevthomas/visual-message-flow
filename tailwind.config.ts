@@ -6,21 +6,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        black: '#000000',
-        white: '#ffffff',
-        gray: {
+        // Cores da marca do cliente
+        'brand-blue': '#0A69A2',
+        'brand-green': '#37A843',
+        'bg-dark': '#121A26',
+        
+        // Mantendo as cores neutras
+        'white': '#ffffff',
+        'black': '#000000',
+        'gray': {
           light: '#d1d5db',
           DEFAULT: '#4b5563',
           dark: '#1f2937',
         },
-        emerald: {
-          DEFAULT: '#10b981',
-          dark: '#047857',
-          light: '#34d399',
-        },
-        green: {
-          600: '#059669',
-        }
       },
       fontFamily: {
         heading: ['Satoshi', 'sans-serif'],
