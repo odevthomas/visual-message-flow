@@ -59,12 +59,12 @@ export const FeaturesSection: React.FC = () => {
     >
       {/* Conteúdo principal */}
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-12 text-center text-gray-900">
-          Soluções Completas para o seu Equipamento
-        </h2>
-        <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto mb-12 text-center">
-          Soluções completas em refrigeração com tecnologia avançada e atendimento especializado
-        </p>
+       <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-center text-gray-900">
+    Soluções Completas para o seu Equipamento
+  </h2>
+  <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto text-center">
+    Soluções completas em refrigeração com tecnologia avançada e atendimento especializado
+  </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service) => (
