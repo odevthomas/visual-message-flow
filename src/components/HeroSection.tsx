@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
 
 import logo from "../assets/brasservice.png";
-import geladeira from "../assets/geladeiras-2.webp"; // verifique se o arquivo existe
+import geladeiraVideo from "../assets/geladeira.mp4";
 
 export const HeroSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -11,7 +11,7 @@ export const HeroSection: React.FC = () => {
 
   const whatsappNumber = "551991195261";
   const whatsappMessage = encodeURIComponent(
-    "Olá! Preciso de assistência técnica para minha geladeira. Gostaria de agendar um atendimento agora."
+    "Olá! Gostaria de solicitar atendimento para minha geladeira. Vi o site da Bras Service e quero agendar agora."
   );
 
   const handleWhatsAppClick = () => {
@@ -24,80 +24,110 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center px-6 md:px-10 lg:px-16 py-20 md:py-28 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center px-6 md:px-10 lg:px-16 py-20 md:py-28 overflow-hidden"
     >
-      {/* Fundo gradiente azul */}
-      <div className="absolute inset-0 -z-20 h-full w-full [background:radial-gradient(125%_125%_at_50%_10%,#1b3e84_40%,#000_80%)]"></div>
+      {/* Fundo de vídeos */}
+      <div className="absolute inset-0 -z-20 h-full w-full overflow-hidden">
+        {/* Vídeo 1 */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover object-top"
+          ref={(video) => {
+            if (video) video.playbackRate = 1.5;
+          }}
+        >
+          <source src={geladeiraVideo} type="video/mp4" />
+        </video>
 
-      {/* Imagem de geladeira como fundo suave para mobile */}
-      <div className="absolute inset-0 -z-10 w-full h-full lg:hidden">
-        <img
-          src={geladeira}
-          alt="Geladeira técnica"
-          className="w-full h-full object-cover opacity-20"
-        />
+        {/* Vídeo 2 sobreposto com leve transparência */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover object-center opacity-60 mix-blend-overlay"
+          ref={(video) => {
+            if (video) video.playbackRate = 1.2;
+          }}
+        >
+          <source src={geladeiraVideo} type="video/mp4" />
+        </video>
+
+        {/* Camada de sombra para suavizar */}
+        <div className="absolute inset-0 bg-black/50"></div>
+
+        {/* Sombras em cima e embaixo */}
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black/90 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black/90 to-transparent"></div>
       </div>
 
-      {/* Container principal */}
-      <div className="container mx-auto max-w-7xl flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-16 relative z-20">
-        {/* Texto */}
+      {/* Conteúdo principal */}
+      <div className="container mx-auto max-w-7xl flex flex-col items-center justify-center relative z-10">
         <motion.div
-          className="flex-1 text-center lg:text-left lg:max-w-[560px]"
-          initial={{ opacity: 0, x: -50 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.9 }}
+          className="w-full text-center"
+          initial={{ opacity: 0, y: -50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, delay: 0.5 }}
         >
           {/* Logo */}
           <img
             src={logo}
             alt="Bras Service"
-            className="mx-auto lg:mx-0 mb-8 h-12 sm:h-16 md:h-20 lg:h-24"
+            className="mx-auto mb-8 h-12 sm:h-16 md:h-20 lg:h-24"
           />
 
-          {/* Título e subtítulo */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-snug text-white">
-            Conserto de Geladeiras e Refrigeração
-          </h1>
-          <p className="text-xl sm:text-2xl md:text-2xl lg:text-3xl text-gray-400 font-semibold mt-2 md:mt-4">
-            em Campinas e Região
-          </p>
+          {/* Título */}
+          <motion.h1
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-snug text-white w-full"
+            initial={{ opacity: 0, y: -20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.7, duration: 1 }}
+          >
+            Conserto de Geladeiras e Serviços de Refrigeração
+          </motion.h1>
+
+          {/* Subtítulo */}
+          <motion.p
+            className="text-xl sm:text-2xl md:text-2xl lg:text-3xl text-gray-400 font-semibold mt-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 1, duration: 1 }}
+          >
+            Atendimento rápido, eficaz e especializado em todas as marcas.
+          </motion.p>
 
           {/* Descrição */}
-          <p className="text-base sm:text-lg md:text-xl text-gray-300 mt-6 md:mt-8 mb-12 max-w-md mx-auto lg:mx-0 leading-relaxed">
-            Atendimento rápido e especializado em todas as marcas, com garantia de 1 ano para clientes em Campinas e região metropolitana.
-          </p>
+          <motion.p
+            className="text-base sm:text-lg md:text-xl text-gray-300 mt-4 md:mt-6 mb-12 max-w-2xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: -20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 1.3, duration: 1 }}
+          >
+            Serviço com garantia de 90 dias, realizado por técnicos qualificados.
+            <br />
+            Atendemos Campinas e toda a região metropolitana.
+          </motion.p>
 
-          {/* Botões CTA */}
-          <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-5">
-            <button
-              onClick={handleWhatsAppClick}
-              className="flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-3.5 bg-green-600/90 hover:bg-green-700 text-white text-lg font-medium rounded-xl shadow-xl hover:scale-105 transition-transform duration-300 backdrop-blur-sm min-w-[200px]"
-            >
-              <FaWhatsapp className="w-5 h-5 md:w-6 md:h-6" />
-              Agendar Atendimento
-            </button>
-
-            <button
-              onClick={handleWhatsAppClick}
-              className="flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-3.5 bg-blue-600/90 hover:bg-blue-700 text-white text-lg font-medium rounded-xl shadow-xl hover:scale-105 transition-transform duration-300 backdrop-blur-sm min-w-[200px]"
-            >
-              Solicitar Orçamento
-            </button>
-          </div>
-        </motion.div>
-
-        {/* Imagem da geladeira no desktop */}
-        <motion.div
-          className="hidden lg:block lg:flex-[1.2] lg:max-w-xl"
-          initial={{ opacity: 0, x: 50 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.9 }}
-        >
-          <img
-            src={geladeira}
-            alt="Geladeira técnica"
-            className="w-full h-full max-h-[750px] rounded-3xl object-cover "
-          />
+          {/* Botão CTA */}
+          <motion.button
+            onClick={handleWhatsAppClick}
+            className="flex flex-row items-center justify-center gap-3 px-8 md:px-10 py-3 sm:py-4 md:py-5 bg-green-600 text-white text-base sm:text-lg md:text-2xl font-bold rounded-xl shadow-xl mx-auto"
+            animate={{
+              scale: [1, 1.05, 1, 1.05, 1],
+              boxShadow: [
+                "0 0 12px rgba(0,255,0,0.5)",
+                "0 0 18px rgba(0,255,0,0.7)",
+                "0 0 12px rgba(0,255,0,0.5)",
+              ],
+            }}
+            transition={{ repeat: Infinity, duration: 2 }}
+          >
+            <FaWhatsapp className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
+            <span>Agendar Atendimento</span>
+          </motion.button>
         </motion.div>
       </div>
     </section>

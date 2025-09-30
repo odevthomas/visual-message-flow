@@ -1,17 +1,51 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,ts,jsx,tsx}", // todos os arquivos do projeto
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       colors: {
-        // Cores da marca do cliente
+        // Mapeando as variáveis CSS para cores do Tailwind
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+
+        // Suas cores personalizadas
         'brand-blue': '#0A69A2',
         'brand-green': '#37A843',
         'bg-dark': '#121A26',
         
-        // Mantendo as cores neutras
         'white': '#ffffff',
         'black': '#000000',
         'gray': {
@@ -67,4 +101,4 @@ module.exports = {
     }
   },
   plugins: [],
-}
+};

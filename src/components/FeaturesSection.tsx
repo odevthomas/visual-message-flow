@@ -16,31 +16,31 @@ interface Service {
   features: string[];
 }
 
-// Lista de serviços
+// Lista de serviços completa com o item de Manutenção Preventiva
 const services: Service[] = [
   {
     title: 'Conserto de Geladeiras',
-    description: 'Reparo rápido e confiável em geladeiras domésticas e comerciais.',
+    description: 'Orçamento justo e confiável, serviço de qualidade. Serviço prestado em domicílio.',
     icon: <FaSnowflake className="text-5xl text-blue-400 mb-4" />,
-    features: ['Diagnóstico gratuito', 'Peças originais', 'Garantia 1 ano'],
+    features: ['Diagnóstico rápido', 'Peças originais', 'Serviço com garantia', 'Pagamento facilitado.'],
   },
   {
     title: 'Manutenção Preventiva',
-    description: 'Evite falhas futuras e prolongue a vida útil do seu equipamento.',
+    description: 'Evite prejuízos e imprevistos. Aumente a vida útil e a eficiência do seu equipamento.',
     icon: <FaTools className="text-5xl text-blue-400 mb-4" />,
-    features: ['Inspeção completa', 'Limpeza profunda', 'Relatório técnico'],
+    features: ['Inspeção completa e detalhada', 'Limpeza técnica profunda', 'Relatório de condições do equipamento'],
   },
   {
     title: 'Higienização Completa',
-    description: 'Desinfecção completa garantindo segurança e eficiência.',
+    description: 'Descontaminação completa, garantindo a qualidade dos alimentos.',
     icon: <FaSprayCan className="text-5xl text-blue-400 mb-4" />,
-    features: ['Desinfecção total', 'Produtos certificados', 'Certificado sanitário'],
+    features: ['Descontaminação total', 'Troca do filtro antiodor', 'Higienização completa', 'Borracha da porta higienizada'],
   },
   {
     title: 'Centrais Frigoríficas',
-    description: 'Atendimento especializado para grandes sistemas comerciais.',
+    description: 'Técnico especializado em central frigorífico de mercado.',
     icon: <FaWarehouse className="text-5xl text-blue-400 mb-4" />,
-    features: ['Atendimento 24h', 'Equipe especializada', 'Contratos de manutenção'],
+    features: ['Atendimento personalizado', 'Equipe especializada', 'Contratos de manutenção preventiva e corretiva'],
   }
 ];
 
@@ -59,14 +59,13 @@ export const FeaturesSection: React.FC = () => {
     >
       {/* Conteúdo principal */}
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-       <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-center text-gray-900">
-    Soluções Completas para o seu Equipamento
-  </h2>
-  <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto text-center">
-    Soluções completas em refrigeração com tecnologia avançada e atendimento especializado
-  </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+   <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 text-center">
+    Soluções completas para o seu equipamento.
+</h2>
+<p className="mt-4 text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto text-center">
+    Problemas com sua geladeira ou freezer? Nós resolvemos para você. Conte com a nossa equipe!
+</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
           {services.map((service) => (
             <div
               key={service.title}

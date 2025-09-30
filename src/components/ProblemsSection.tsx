@@ -9,56 +9,56 @@ import {
   Clock,
   CheckCircle,
 } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa"; // Importe o ícone do WhatsApp
+import { FaWhatsapp } from "react-icons/fa";
 
 const problems = [
   {
     icon: Thermometer,
     title: "Não Gela",
-    description: "Geladeira não resfria adequadamente ou parou completamente",
-    solution: "Diagnóstico do compressor e sistema de refrigeração",
+    description: "Minha geladeira não gela na parte de baixo.",
+    solution: "Agende já uma visita para garantir a eficiência da sua geladeira.",
     urgency: "Alta",
-    whatsappMessage: "Olá, minha geladeira não está gelando. Preciso de ajuda urgente para resolver isso!",
+    whatsappMessage: "Olá, minha geladeira não gela na parte de baixo. Poderiam agendar uma visita técnica?",
   },
   {
     icon: Zap,
     title: "Ruído Excessivo",
-    description: "Barulhos estranhos, vibração ou funcionamento irregular",
-    solution: "Verificação do motor e componentes mecânicos",
+    description: "Minha geladeira está fazendo um barulho estranho.",
+    solution: "Agende já uma visita para garantir a eficiência da sua geladeira.",
     urgency: "Média",
-    whatsappMessage: "Olá, minha geladeira está fazendo um ruído estranho. Gostaria de um diagnóstico, podem me ajudar?",
+    whatsappMessage: "Minha geladeira está fazendo um barulho estranho. Gostaria de agendar uma visita técnica.",
   },
   {
     icon: Droplets,
     title: "Vazamento de Água",
-    description: "Acúmulo de água dentro ou embaixo da geladeira",
-    solution: "Reparo do sistema de drenagem e vedações",
+    description: "Minha geladeira está vazando água interna.",
+    solution: "Agende já uma visita para garantir a eficiência da sua geladeira.",
     urgency: "Alta",
-    whatsappMessage: "Minha geladeira está vazando água. Poderiam agendar um técnico para me atender?",
-  },
-  {
-    icon: AlertCircle,
-    title: "Porta não Veda",
-    description: "Borrachas ressecadas ou danificadas perdendo a vedação",
-    solution: "Substituição de borrachas e ajuste de portas",
-    urgency: "Média",
-    whatsappMessage: "As borrachas da porta da minha geladeira estão danificadas. Gostaria de um orçamento para a substituição.",
+    whatsappMessage: "Minha geladeira está vazando água. Poderiam agendar um técnico?",
   },
   {
     icon: Settings,
     title: "Problemas Elétricos",
-    description: "Não liga, desarma disjuntor ou oscilação de energia",
-    solution: "Revisão completa do sistema elétrico",
+    description: "Minha geladeira não liga nada.",
+    solution: "Agende já uma visita para garantir a eficiência da sua geladeira.",
     urgency: "Alta",
-    whatsappMessage: "Minha geladeira não liga mais. Preciso de um técnico para verificar o sistema elétrico, podem me ajudar?",
+    whatsappMessage: "Minha geladeira não liga mais. Preciso de um técnico para verificar o sistema elétrico.",
+  },
+  {
+    icon: AlertCircle,
+    title: "Compressor com Ruído",
+    description: "O compressor da minha geladeira não gela e faz um barulho estranho.",
+    solution: "Solicite já uma visita técnica para garantir a eficiência da sua geladeira.",
+    urgency: "Alta",
+    whatsappMessage: "O compressor da minha geladeira está fazendo barulho e ela não gela. Podem me ajudar?",
   },
   {
     icon: Clock,
-    title: "Manutenção Preventiva",
-    description: "Limpeza e verificação para evitar problemas futuros",
-    solution: "Programa completo de manutenção preventiva",
+    title: "Higienização Completa",
+    description: "Geladeira parou de funcionar e estragou alimentos interno. Fazemos higienização e descontaminação completa da sua geladeira.",
+    solution: "Agende já uma visita para garantir a eficiência da sua geladeira.",
     urgency: "Baixa",
-    whatsappMessage: "Gostaria de agendar uma manutenção preventiva para minha geladeira. Como podemos prosseguir?",
+    whatsappMessage: "Gostaria de agendar uma higienização completa para minha geladeira. Como podemos prosseguir?",
   },
 ] as const;
 
@@ -84,11 +84,10 @@ export default function ProblemsSection() {
       <div className="max-w-7xl mx-auto px-4 relative z-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Problemas Comuns que Resolvemos
+            Problemas comuns dos refrigeradores.
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Nossa equipe especializada identifica rapidamente o problema e
-            oferece a solução mais eficiente
+            Nossa equipe especializada identifica rapidamente o problema e oferece uma solução eficiente.
           </p>
         </div>
 
@@ -150,8 +149,6 @@ export default function ProblemsSection() {
           })}
         </div>
 
-        {/* Emergency CTA */}
-       
       </div>
     </section>
   );

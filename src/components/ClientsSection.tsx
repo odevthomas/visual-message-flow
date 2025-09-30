@@ -11,8 +11,7 @@ import francoLogo from "../assets/clients/franco.png";
 import paoDeQueijoLogo from "../assets/clients/pao-de-queijo.png";
 import grilettoLogo from "../assets/clients/griletto.png";
 
-// ===== Marquee Component (Pode ser um componente separado ou mantido aqui) =====
-const Marquee = ({ children, duration = 35 }) => ( // Duração ligeiramente diferente para variação
+const Marquee = ({ children, duration = 35 }) => (
   <div className="overflow-hidden relative w-full">
     <motion.div
       className="flex w-max"
@@ -25,7 +24,6 @@ const Marquee = ({ children, duration = 35 }) => ( // Duração ligeiramente dif
   </div>
 );
 
-// ===== Clients Section Component =====
 export const ClientsSection: React.FC = () => {
   const clients = [
     { name: "Mini Mercado Extra", logo: miniExtraLogo },
@@ -40,24 +38,22 @@ export const ClientsSection: React.FC = () => {
 
   return (
     <section className="py-16 sm:py-20 md:py-24 relative overflow-hidden">
-      {/* Fundo com o mesmo gradiente da seção de marcas atendidas */}
       <div className="absolute inset-0 -z-10 h-full w-full [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#fff_100%)]"></div>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-20 text-center">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">Clientes Parceiros</h2>
         <p className="text-gray-600 text-lg sm:text-xl max-w-2xl mx-auto mb-12">
-          Empresas e marcas que confiam no nosso trabalho para fortalecer sua presença e resultados.
+          Empresas que confiam na qualidade do nosso trabalho e contam com nossos contratos de manutenção preventiva e corretiva, garantindo segurança, eficiência e tranquilidade no funcionamento de seus equipamentos.
         </p>
 
         <Marquee duration={35}>
           {clients.map((client, index) => (
             <div key={index} className="flex-shrink-0 w-40 sm:w-52 md:w-64 h-32 sm:h-40 md:h-48 flex items-center justify-center px-4 py-2 relative group">
-              {/* Efeito de brilho no fundo no hover */}
               <div className="absolute inset-0 bg-brand-blue/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
               <img
                 src={client.logo}
                 alt={client.name}
-                className="max-w-[80%] max-h-[80%] object-contain transition-all duration-300 opacity-80 group-hover:opacity-100 group-hover:scale-105" // Filtro e tamanho ajustados
+                className="max-w-[80%] max-h-[80%] object-contain transition-all duration-300 opacity-80 group-hover:opacity-100 group-hover:scale-105"
               />
             </div>
           ))}

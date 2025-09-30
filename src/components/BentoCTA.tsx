@@ -1,4 +1,5 @@
 import React from "react";
+import { Card } from "@/components/ui/card"; // Assuming Card is a component you have
 import { Star, StarHalf, StarOff, ArrowRight } from "lucide-react";
 import financeIcon from "@/assets/icons/finace.png";
 
@@ -111,17 +112,17 @@ const BentoCTA: React.FC = () => {
                 </div>
                 <div className="text-center mb-6">
                   <h3 className="text-xl font-bold text-black mb-2">
-                    Orçamento Gratuito
+                    Orçamento sem compromisso
                   </h3>
                   <p className="text-gray-600">
-                    Resposta em até 30 minutos, sem burocracia
+                    O técnico vai até o seu equipamento, e faz o orçamento sem compromisso.
                   </p>
                 </div>
               </div>
               
               {/* BOTÃO AZUL */}
               <button className="w-full bg-blue-600 text-white font-bold px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2">
-                Solicitar agora
+                Entrar em contato agora
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>

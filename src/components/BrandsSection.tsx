@@ -37,9 +37,11 @@ export const BrandsSection: React.FC = () => {
       <div className="absolute inset-0 -z-10 h-full w-full [background:radial-gradient(145%_125%_at_55%_20%,#fff_40%,#fff_95%)]"></div>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-20 text-center">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">Marcas Atendidas</h2>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+          Atendemos todas as marcas
+        </h2>
         <p className="text-gray-600 text-lg sm:text-xl max-w-2xl mx-auto mb-12">
-          Trabalhamos com as principais marcas do mercado, garantindo qualidade e suporte especializado.
+          Técnico experiente, especializado em conserto e manutenção de geladeiras, freezers e equipamentos de refrigeração. Serviço rápido, seguro e com garantia de 90 dias.
         </p>
 
         <Marquee duration={30}>
