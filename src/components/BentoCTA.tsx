@@ -89,11 +89,7 @@ const BentoCTA: React.FC = () => {
                 </div>
               </div>
 
-              {/* BOTÃO AZUL */}
-              <button className="w-full bg-blue-600 text-white font-bold px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2">
-                Ver depoimentos
-                <ArrowRight className="w-4 h-4" />
-              </button>
+              
             </div>
           </div>
 
