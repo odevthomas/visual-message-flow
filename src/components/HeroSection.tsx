@@ -1,8 +1,9 @@
 import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { FaWhatsapp } from 'react-icons/fa'
 
 import logo from '../assets/brasservice.png'
-import geladeiraVideo from '../assets/geladeira.mp4'
+import geladeiraVideo from '../assets/geladeira.mp4' // <--- Verifique se o caminho do seu vídeo está correto
 
 export const HeroSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -27,18 +28,21 @@ export const HeroSection: React.FC = () => {
     >
       {/* Fundo de vídeo responsivo */}
       <div className='absolute inset-0 w-full h-full'>
+        {/*
+          IMPORTANTE: Certifique-se de que o caminho 'geladeiraVideo' está correto
+          ou substitua-o pelo seu próprio URL. As propriedades 'autoPlay', 'loop',
+          'muted' e 'playsInline' são essenciais para que o vídeo rode
+          automaticamente em navegadores mobile e desktop.
+        */}
         <video
           autoPlay
           loop
           muted
           playsInline
           className='absolute top-0 left-0 w-full h-full object-cover'
-          style={{ objectPosition: 'center center' }}
-          ref={video => {
-            if (video) video.playbackRate = 1.2
-          }}
         >
           <source src={geladeiraVideo} type='video/mp4' />
+          Seu navegador não suporta a tag de vídeo.
         </video>
 
         {/* Overlay escuro para contraste */}
@@ -55,49 +59,31 @@ export const HeroSection: React.FC = () => {
             transition={{ duration: 1, delay: 0.3 }}
           >
             {/* Logo */}
-            <motion.img
+            <img
               src={logo}
               alt='Bras Service'
               className='h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain'
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 0.5, duration: 0.8 }}
             />
 
             {/* Título */}
-            <motion.h1
-              className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight text-white max-w-5xl'
-              initial={{ opacity: 0, y: -30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.7, duration: 0.9 }}
-            >
+            <h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight text-white max-w-5xl'>
               Conserto de Geladeiras e Serviços de Refrigeração
-            </motion.h1>
+            </h1>
 
             {/* Subtítulo */}
-            <motion.p
-              className='text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 font-semibold max-w-3xl'
-              initial={{ opacity: 0, y: -20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.9, duration: 0.9 }}
-            >
+            <p className='text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 font-semibold max-w-3xl'>
               Atendimento rápido, eficaz e especializado em todas as marcas.
-            </motion.p>
+            </p>
 
             {/* Descrição */}
-            <motion.p
-              className='text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 max-w-3xl leading-relaxed'
-              initial={{ opacity: 0, y: -20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 1.1, duration: 0.9 }}
-            >
+            <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 max-w-3xl leading-relaxed'>
               Serviço com garantia de 90 dias, realizado por técnicos
               qualificados.
               <br className='hidden sm:block' />
               <span className='sm:inline block mt-1 sm:mt-0'>
                 Atendemos Campinas e toda a região metropolitana.
               </span>
-            </motion.p>
+            </p>
 
             {/* Botão CTA */}
             <motion.button

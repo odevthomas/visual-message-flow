@@ -22,9 +22,9 @@ const Marquee = ({ children, duration = 30 }) => (
 export const BrandsSection: React.FC = () => {
   const brands = [
     { name: "Brastemp", logo: brastempLogo },
-    { name: "Electrolux", logo: "https://cdn.brandfetch.io/ide409nnKf/theme/light/logo.svg" },
+    { name: "Electrolux", logo: "https://cdn.brandfetch.io/ide409nnKf/theme/dark/logo.svg" },
     { name: "Samsung", logo: "https://cdn.brandfetch.io/iduaw_nOnR/theme/dark/logo.svg" },
-    { name: "Sony", logo: "https://cdn.brandfetch.io/ido0LYg_hc/theme/light/logo.svg" },
+    { name: "Sony", logo: "https://cdn.brandfetch.io/ido0LYg_hc/theme/dark/logo.svg" },
     { name: "Panasonic", logo: panasonicLogo },
     { name: "Continental", logo: "https://static.wixstatic.com/media/376d2e_20a87a16f6334719b39fb8da60010b59~mv2.png" },
     { name: "Consul", logo: "https://cdn.brandfetch.io/idFBBFlZ9z/theme/dark/logo.svg" },
