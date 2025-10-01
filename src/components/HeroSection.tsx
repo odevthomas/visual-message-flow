@@ -40,7 +40,7 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       ref={containerRef}
-      className='relative w-full min-h-[110vh] flex items-center justify-center overflow-hidden'
+      className='relative w-full min-h-screen flex items-center justify-center overflow-hidden'
     >
       {/* Fundo de vídeo */}
       <div className='absolute inset-0 w-full h-full'>
@@ -59,14 +59,14 @@ export const HeroSection: React.FC = () => {
         </video>
 
         {/* Overlay escuro */}
-        <div className='absolute inset-0 bg-black bg-opacity-40'></div>
+        <div className='absolute inset-0 bg-black bg-opacity-50'></div>
       </div>
 
       {/* Conteúdo principal */}
-      <div className='relative z-10 w-full px-4 sm:px-6 md:px-10 lg:px-16 py-20 md:py-28'>
+      <div className='relative z-10 w-full px-4 sm:px-6 md:px-10 lg:px-16 py-16 md:py-20'>
         <div className='container mx-auto max-w-6xl'>
           <motion.div
-            className='flex flex-col items-center text-center space-y-6 md:space-y-8'
+            className='flex flex-col items-center text-center space-y-4 sm:space-y-6 md:space-y-8'
             initial={{ opacity: 0, y: -50 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, delay: 0.3 }}
@@ -75,7 +75,7 @@ export const HeroSection: React.FC = () => {
             <motion.img
               src={logo}
               alt='Bras Service'
-              className='h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain'
+              className='h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain'
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 0.5, duration: 0.8 }}
@@ -83,7 +83,7 @@ export const HeroSection: React.FC = () => {
 
             {/* Título */}
             <motion.h1
-              className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight text-white max-w-5xl'
+              className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight text-white max-w-4xl px-2'
               initial={{ opacity: 0, y: -30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.7, duration: 0.9 }}
@@ -91,13 +91,66 @@ export const HeroSection: React.FC = () => {
               Conserto de Geladeiras e Serviços de Refrigeração
             </motion.h1>
 
-           
-          
+            {/* Subtítulo com localização */}
+            <motion.div
+              className='flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3'
+              initial={{ opacity: 0, y: -20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.9, duration: 0.8 }}
+            >
+              <div className='flex items-center gap-2 text-white/90'>
+            <svg
+  xmlns='http://www.w3.org/2000/svg'
+  width='24'
+  height='24'
+  viewBox='0 0 24 24'
+>
+  <circle cx='12' cy='9' r='2.5' fill='currentColor' fill-opacity='0'>
+    <animate
+      fill='freeze'
+      attributeName='fill-opacity'
+      begin='0.7s'
+      dur='0.15s'
+      values='0;1'
+    />
+  </circle>
+  <path
+    fill='none'
+    stroke='currentColor'
+    stroke-dasharray='48'
+    stroke-dashoffset='48'
+    stroke-linecap='round'
+    stroke-linejoin='round'
+    stroke-width='2'
+    d='M12 20.5c0 0 -6 -7 -6 -11.5c0 -3.31 2.69 -6 6 -6c3.31 0 6 2.69 6 6c0 4.5 -6 11.5 -6 11.5Z'
+  >
+    <animate
+      fill='freeze'
+      attributeName='stroke-dashoffset'
+      dur='0.6s'
+      values='48;0'
+    />
+    <animateTransform
+      attributeName='transform'
+      dur='3s'
+      keyTimes='0;0.3;0.4;0.54;0.6;0.68;0.7;1'
+      repeatCount='indefinite'
+      type='rotate'
+      values='0 12 20.5;0 12 20.5;-8 12 20.5;0 12 20.5;5 12 20.5;-2 12 20.5;0 12 20.5;0 12 20.5'
+    />
+  </path>
+</svg>
+
+                <span className='text-lg sm:text-xl md:text-2xl font-semibold'>
+                  Campinas e Região
+                </span>
+              </div>
+            </motion.div>
 
             {/* Botão CTA */}
             <motion.button
               onClick={handleWhatsAppClick}
-              className='mt-6 md:mt-8 flex flex-row items-center justify-center gap-3 px-8 sm:px-10 md:px-12 py-4 sm:py-5 md:py-6 bg-green-600 hover:bg-green-700 text-white text-lg sm:text-xl md:text-2xl font-bold rounded-2xl shadow-2xl transition-all duration-300'
+              className='mt-4 sm:mt-6 md:mt-8 flex flex-row items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 bg-green-600 hover:bg-green-700 text-white text-base sm:text-lg md:text-xl lg:text-2xl font-bold rounded-2xl shadow-2xl transition-all duration-300 w-full sm:w-auto max-w-md'
               initial={{ opacity: 0, scale: 0.9 }}
               animate={
                 isInView
@@ -121,7 +174,7 @@ export const HeroSection: React.FC = () => {
               whileTap={{ scale: 0.95 }}
             >
               <svg
-                className='w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8'
+                className='w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 flex-shrink-0'
                 fill='currentColor'
                 viewBox='0 0 24 24'
               >
