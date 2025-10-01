@@ -1,13 +1,16 @@
-import React, { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { FaWhatsapp } from 'react-icons/fa'
+'use client'
 
+import React, { useRef, useEffect } from 'react'
+import { motion, useInView } from 'framer-motion'
+
+// Logo
 import logo from '../assets/brasservice.png'
-// Remova este import, pois o vídeo agora está na pasta public
-// import geladeiraVideo from '../assets/geladeira.mp4'
+// Importando vídeo
+import geladeiraVideo from '../assets/geladeira.mp4'
 
 export const HeroSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.4 })
 
   const whatsappNumber = '551991195261'
@@ -22,27 +25,41 @@ export const HeroSection: React.FC = () => {
     )
   }
 
+  useEffect(() => {
+    const videoEl = videoRef.current
+    if (videoEl) {
+      videoEl.playbackRate = 1.2
+      videoEl
+        .play()
+        .catch(() =>
+          console.warn('Autoplay do vídeo bloqueado pelo navegador.')
+        )
+    }
+  }, [])
+
   return (
     <section
       ref={containerRef}
       className='relative w-full min-h-[110vh] flex items-center justify-center overflow-hidden'
     >
-      {/* Fundo de vídeo responsivo */}
+      {/* Fundo de vídeo */}
       <div className='absolute inset-0 w-full h-full'>
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
+          preload='auto'
           className='absolute top-0 left-0 w-full h-full object-cover'
+          style={{ objectPosition: 'center center' }}
         >
-          {/* O caminho agora é direto para a pasta public */}
-          <source src='/geladeira.mp4' type='video/mp4' />
-          Seu navegador não suporta a tag de vídeo.
+          <source src={geladeiraVideo} type='video/mp4' />
+          Seu navegador não suporta vídeo.
         </video>
 
-        {/* Overlay escuro para contraste */}
-        <div className='absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80'></div>
+        {/* Overlay escuro */}
+        <div className='absolute inset-0 bg-black bg-opacity-40'></div>
       </div>
 
       {/* Conteúdo principal */}
@@ -55,31 +72,49 @@ export const HeroSection: React.FC = () => {
             transition={{ duration: 1, delay: 0.3 }}
           >
             {/* Logo */}
-            <img
+            <motion.img
               src={logo}
               alt='Bras Service'
               className='h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain'
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: 0.5, duration: 0.8 }}
             />
 
             {/* Título */}
-            <h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight text-white max-w-5xl'>
+            <motion.h1
+              className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight text-white max-w-5xl'
+              initial={{ opacity: 0, y: -30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.7, duration: 0.9 }}
+            >
               Conserto de Geladeiras e Serviços de Refrigeração
-            </h1>
+            </motion.h1>
 
             {/* Subtítulo */}
-            <p className='text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 font-semibold max-w-3xl'>
+            <motion.p
+              className='text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 font-semibold max-w-3xl'
+              initial={{ opacity: 0, y: -20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.9, duration: 0.9 }}
+            >
               Atendimento rápido, eficaz e especializado em todas as marcas.
-            </p>
+            </motion.p>
 
             {/* Descrição */}
-            <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 max-w-3xl leading-relaxed'>
+            <motion.p
+              className='text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 max-w-3xl leading-relaxed'
+              initial={{ opacity: 0, y: -20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 1.1, duration: 0.9 }}
+            >
               Serviço com garantia de 90 dias, realizado por técnicos
               qualificados.
               <br className='hidden sm:block' />
               <span className='sm:inline block mt-1 sm:mt-0'>
                 Atendemos Campinas e toda a região metropolitana.
               </span>
-            </p>
+            </motion.p>
 
             {/* Botão CTA */}
             <motion.button
