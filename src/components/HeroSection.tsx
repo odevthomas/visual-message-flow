@@ -91,30 +91,8 @@ export const HeroSection: React.FC = () => {
               Conserto de Geladeiras e Serviços de Refrigeração
             </motion.h1>
 
-            {/* Subtítulo */}
-            <motion.p
-              className='text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 font-semibold max-w-3xl'
-              initial={{ opacity: 0, y: -20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.9, duration: 0.9 }}
-            >
-              Atendimento rápido, eficaz e especializado em todas as marcas.
-            </motion.p>
-
-            {/* Descrição */}
-            <motion.p
-              className='text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 max-w-3xl leading-relaxed'
-              initial={{ opacity: 0, y: -20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 1.1, duration: 0.9 }}
-            >
-              Serviço com garantia de 90 dias, realizado por técnicos
-              qualificados.
-              <br className='hidden sm:block' />
-              <span className='sm:inline block mt-1 sm:mt-0'>
-                Atendemos Campinas e toda a região metropolitana.
-              </span>
-            </motion.p>
+           
+          
 
             {/* Botão CTA */}
             <motion.button
