@@ -3,7 +3,8 @@ import { motion, useInView } from 'framer-motion'
 import { FaWhatsapp } from 'react-icons/fa'
 
 import logo from '../assets/brasservice.png'
-import geladeiraVideo from '../assets/geladeira.mp4' // <--- Verifique se o caminho do seu vídeo está correto
+// Remova este import, pois o vídeo agora está na pasta public
+// import geladeiraVideo from '../assets/geladeira.mp4'
 
 export const HeroSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -28,12 +29,6 @@ export const HeroSection: React.FC = () => {
     >
       {/* Fundo de vídeo responsivo */}
       <div className='absolute inset-0 w-full h-full'>
-        {/*
-          IMPORTANTE: Certifique-se de que o caminho 'geladeiraVideo' está correto
-          ou substitua-o pelo seu próprio URL. As propriedades 'autoPlay', 'loop',
-          'muted' e 'playsInline' são essenciais para que o vídeo rode
-          automaticamente em navegadores mobile e desktop.
-        */}
         <video
           autoPlay
           loop
@@ -41,7 +36,8 @@ export const HeroSection: React.FC = () => {
           playsInline
           className='absolute top-0 left-0 w-full h-full object-cover'
         >
-          <source src={geladeiraVideo} type='video/mp4' />
+          {/* O caminho agora é direto para a pasta public */}
+          <source src='/geladeira.mp4' type='video/mp4' />
           Seu navegador não suporta a tag de vídeo.
         </video>
 
