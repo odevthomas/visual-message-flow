@@ -23,6 +23,8 @@ function App() {
         <section id="hero">
           <HeroSection />
         </section>
+        <ClientsSection />
+
         
 
         <FeaturesSection />
@@ -33,7 +35,6 @@ function App() {
         
         <BentoCTA />
         
-        <ClientsSection />
         
         <section id="faq">
           <FAQSection />
