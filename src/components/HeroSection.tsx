@@ -4,9 +4,8 @@ import React, { useRef, useEffect, useState } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { FaWhatsapp } from 'react-icons/fa'
 
-// Logo
+// Assets
 import logo from '../assets/brasservice.png'
-// Importando vídeo
 import geladeiraVideo from '../assets/geladeira.mp4'
 
 const WHATSAPP_CONFIG = {
@@ -16,9 +15,7 @@ const WHATSAPP_CONFIG = {
 }
 
 const ANIMATION_CONFIG = {
-  duration: {
-    normal: 0.9
-  },
+  duration: 0.9,
   delay: {
     logo: 0.5,
     title: 0.7,
@@ -35,39 +32,30 @@ export const HeroSection: React.FC = () => {
   const [videoLoaded, setVideoLoaded] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
 
-  // Autoplay do vídeo
+  // Autoplay seguro do vídeo (com fallback silencioso)
   useEffect(() => {
     const videoEl = videoRef.current
     if (!videoEl) return
 
-    const playVideo = () => {
-      videoEl.play().catch(error => {
-        console.error('Autoplay bloqueado:', error)
-      })
+    const tryPlay = () => {
+      videoEl.play().catch(err => console.warn('Autoplay bloqueado:', err))
     }
 
-    playVideo()
-    videoEl.addEventListener('canplaythrough', playVideo)
-
-    return () => {
-      videoEl.removeEventListener('canplaythrough', playVideo)
-    }
+    tryPlay()
+    videoEl.addEventListener('canplaythrough', tryPlay)
+    return () => videoEl.removeEventListener('canplaythrough', tryPlay)
   }, [])
 
-  const getAnimationProps = (baseAnimation: any) => {
-    if (prefersReducedMotion) {
-      return { opacity: isInView ? 1 : 0 }
-    }
-    return baseAnimation
-  }
+  const getAnimationProps = (animation: any) =>
+    prefersReducedMotion ? { opacity: isInView ? 1 : 0 } : animation
 
   return (
     <section
       ref={containerRef}
-      className='relative w-full min-h-screen flex items-center justify-center overflow-hidden'
-      aria-label='Seção principal - Conserto de geladeiras'
+      className='relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black'
+      aria-label='Seção principal — Conserto de Geladeiras'
     >
-      {/* Fundo de vídeo com loading state */}
+      {/* Fundo de vídeo com gradient e fallback */}
       <div className='absolute inset-0 w-full h-full'>
         {!videoLoaded && (
           <div className='absolute inset-0 bg-gradient-to-br from-blue-900 to-blue-700 animate-pulse' />
@@ -91,9 +79,10 @@ export const HeroSection: React.FC = () => {
           Seu navegador não suporta vídeo.
         </video>
 
-        <div className='absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60' />
+        {/* Overlays para contraste e foco */}
+        <div className='absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80' />
         <div
-          className='absolute inset-0 bg-radial-gradient opacity-40'
+          className='absolute inset-0 opacity-40'
           style={{
             background:
               'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.7) 100%)'
@@ -101,37 +90,30 @@ export const HeroSection: React.FC = () => {
         />
       </div>
 
-      {/* Conteúdo principal */}
+      {/* Conteúdo */}
       <div className='relative z-10 w-full px-4 sm:px-6 md:px-10 lg:px-16 py-16 md:py-20'>
         <div className='container mx-auto max-w-4xl'>
           <motion.div
             className='flex flex-col items-center text-center space-y-4 sm:space-y-6 md:space-y-8'
             initial={{ opacity: 0, y: -50 }}
             animate={getAnimationProps(isInView ? { opacity: 1, y: 0 } : {})}
-            transition={{
-              duration: ANIMATION_CONFIG.duration.normal,
-              delay: 0.3
-            }}
+            transition={{ duration: ANIMATION_CONFIG.duration, delay: 0.3 }}
           >
             {/* Logo */}
-            <motion.div
-              className='relative'
+            <motion.img
+              src={logo}
+              alt='Bras Service — Assistência Técnica'
+              className='h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain drop-shadow-xl'
               initial={{ opacity: 0, scale: 0.8 }}
               animate={getAnimationProps(
                 isInView ? { opacity: 1, scale: 1 } : {}
               )}
               transition={{ delay: ANIMATION_CONFIG.delay.logo, duration: 0.8 }}
-            >
-              <img
-                src={logo}
-                alt='Bras Service'
-                className='h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain'
-              />
-            </motion.div>
+            />
 
-            {/* Título com a frase de 24 horas */}
+            {/* Título */}
             <motion.h1
-              className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white max-w-3xl px-2'
+              className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white max-w-3xl px-2 drop-shadow-2xl'
               initial={{ opacity: 0, y: -30 }}
               animate={getAnimationProps(isInView ? { opacity: 1, y: 0 } : {})}
               transition={{
@@ -142,7 +124,7 @@ export const HeroSection: React.FC = () => {
               Conserto de Geladeiras em Campinas em até 24h
             </motion.h1>
 
-            {/* Subtítulo - Removido para ser mais discreto */}
+            {/* Subtítulo */}
             <motion.p
               className='text-lg sm:text-xl md:text-2xl text-gray-200 mt-4 max-w-2xl px-2'
               initial={{ opacity: 0, y: -20 }}
@@ -152,7 +134,7 @@ export const HeroSection: React.FC = () => {
                 duration: 0.8
               }}
             >
-              Atendimento rápido e com garantia.
+              Atendimento rápido, com garantia e confiança.
             </motion.p>
 
             {/* Botão CTA */}
@@ -202,8 +184,6 @@ export const HeroSection: React.FC = () => {
           </motion.div>
         </div>
       </div>
-
-      {/* Indicador de scroll - Removido para um design mais discreto */}
     </section>
   )
 }
