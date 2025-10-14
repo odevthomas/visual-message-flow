@@ -10,7 +10,7 @@ import brasserviceLogo from '../assets/brasservice.png'
 
 export const Footer: React.FC = () => {
   const whatsappNumber = '5519991195261' // Ajustei o número aqui para consistência
-  const instagramUrl = 'https://www.instagram.com/brasservice_oficial' // Exemplo
+  const instagramUrl = 'https://www.instagram.com/bras_service/' // Exemplo
   const emailAddress = 'bras-service@hotmail.com'
 
   const handleWhatsAppClick = () => {
