@@ -121,7 +121,7 @@ export const HeroSection: React.FC = () => {
                 duration: 0.9
               }}
             >
-              Conserto de Geladeiras em Campinase Região em até 24h
+              Conserto de Geladeiras em Campinase e Região em até 24h
             </motion.h1>
 
             {/* Subtítulo */}
